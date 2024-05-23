@@ -5,7 +5,7 @@ import java.lang.Math;
 /**
  * The Vector class represents a vector in three-dimensional space.
  * A vector is a directed line segment with magnitude and direction.
- * * @author Isca Fitousi and Avital Orenstin
+ * @author Isca Fitousi and Avital Orenstin.
  */
 public class Vector extends Point {
 

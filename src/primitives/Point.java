@@ -5,7 +5,7 @@ import java.util.Objects;
 
 /**
  * The Point class represents a point in three-dimensional space.
- * * @author Isca Fitousi and Avital Orenstin
+ * @author Isca Fitousi and Avital Orenstin.
  */
 
 public class Point {
@@ -18,7 +18,7 @@ public class Point {
     /**
      * The coordinates of the point.
      */
-    protected final Double3 xyz;
+    public final Double3 xyz;
 
     /**
      * Constructs a point with the specified coordinates.

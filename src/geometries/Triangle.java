@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * The Triangle class represents a triangle in three-dimensional space.
  * A triangle is a polygon with three vertices.
- * * @author Isca Fitousi and Avital Orenstin
+ *@author Isca Fitousi and Avital Orenstin
  */
 public class Triangle extends Polygon {
 

@@ -1,12 +1,15 @@
 package geometries;
 
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.List;
 
 /**
  * The Sphere class represents a sphere in three-dimensional space.
  * A sphere is a special type of radial geometry shape with a center point and a radius.
- * * @author Isca Fitousi and Avital Orenstin
+ * @author Isca Fitousi and Avital Orenstin.
  */
 public class Sphere extends RadialGeometry {
 
@@ -30,6 +33,9 @@ public class Sphere extends RadialGeometry {
 
     @Override
     public Vector getNormal(Point p) {
-        return null;
+        Vector n = p.subtract(center);
+        return n.normalize();
     }
+
+
 }

@@ -5,19 +5,18 @@ import java.util.Objects;
  * The Ray class represents a ray in three-dimensional space.
  * It consists of a starting point (head) and a direction vector.
  * A vector in the direction is always normalized for future calculations.
- * * @author Isca Fitousi and Avital Orenstin
  */
 public class Ray {
 
     /**
      * The starting point of the ray.
      */
-    private final Point head;
+    public final Point head;
 
     /**
      * The direction vector of the ray, always normalized.
      */
-    private final Vector direction;
+    public final Vector direction;
 
     /**
      * Constructs a Ray with the specified head (starting point) and direction.
