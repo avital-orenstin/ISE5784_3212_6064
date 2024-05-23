@@ -5,7 +5,7 @@ import primitives.*;
 /**
  * The RadialGeometry abstract class represents a radial geometry shape in three-dimensional space.
  * Radial geometry shapes are defined by a radius.
- * * @author Isca Fitousi and Avital Orenstin
+ * * @author Isca Fitousi and Avital Orenstin.
  */
 public abstract class RadialGeometry implements Geometry {
 

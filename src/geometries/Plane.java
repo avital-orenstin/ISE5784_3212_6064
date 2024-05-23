@@ -2,22 +2,24 @@ package geometries;
 
 import primitives.*;
 
+import java.util.List;
+
 /**
  * The Plane class represents a plane in three-dimensional space.
  * A plane is defined by a point on the plane and its normal vector.
- * * @author Isca Fitousi and Avital Orenstin
+ * @author Avital Orenshtein and Isca Fitousi
  */
 public class Plane implements Geometry {
 
     /**
      * A point on the plane.
      */
-    final private Point q;
+    private final Point q;
 
     /**
      * The normal vector to the plane.
      */
-    final private Vector normal;
+    private final Vector normal;
 
     /**
      * Constructs a plane with the given point and normal vector.
@@ -30,7 +32,6 @@ public class Plane implements Geometry {
         this.normal = normal.normalize();
     }
 
-
     /**
      * Constructs a plane passing through three given points.
      *
@@ -39,8 +40,10 @@ public class Plane implements Geometry {
      * @param point3 The third point on the plane.
      */
     public Plane(Point point1, Point point2, Point point3) {
-        this.normal = null; // Note: The normal vector is not initialized here.
-        this.q = point1; // Note: The point q is initialized with the first given point.
+        Vector myVec1 = point1.subtract(point2);
+        Vector myVec2 = point1.subtract(point3);
+        this.q = new Point(point1.xyz);
+        this.normal =myVec1.crossProduct(myVec2).normalize();
     }
 
     /**
@@ -57,7 +60,7 @@ public class Plane implements Geometry {
 
     @Override
     public Vector getNormal(Point p) {
-        return null; // Note: This method is not fully implemented and returns null.
+        return normal;
     }
 
     /**
@@ -67,6 +70,8 @@ public class Plane implements Geometry {
      */
 
     public Vector getNormal() {
-        return null; // Note: This method is not fully implemented and returns null.
+        return normal;
     }
+
+
 }
