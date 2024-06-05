@@ -52,11 +52,11 @@ public class Vector extends Point {
     /**
      * Scales this vector by the given scalar value.
      *
-     * @param scl The scalar value to scale by.
+     * @param scalar The scalar value to scale by.
      * @return The scaled vector.
      */
-    public Vector scale(double scl) {
-        return new Vector(xyz.scale(scl));
+    public Vector scale(double scalar) {
+        return new Vector(xyz.scale(scalar));
     }
 
     /**
@@ -89,7 +89,7 @@ public class Vector extends Point {
      * @return The squared length of this vector.
      */
     public double lengthSquared() {
-        return this.dotProduct(this);
+        return this.xyz.d1 * this.xyz.d1 +this.xyz.d2* this.xyz.d2+this.xyz.d3* this.xyz.d3;
     }
 
     /**

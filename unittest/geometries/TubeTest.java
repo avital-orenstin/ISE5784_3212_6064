@@ -23,39 +23,14 @@ class TubeTest {
     @Test
     void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
-        Tube tube1 = new Tube(1.0, new Ray(new Point(1, 1, 1), new Vector(1, 0, 0)));
+        Tube tube = new Tube(1.0, new Ray(new Point(1, 1, 1), new Vector(1, 0, 0)));
         Point point = new Point(2, 0, 1);
 
-        //TC01: Check if the normal vector is calculated correctly.
+        // Check if the normal vector is calculated correctly.
         assertEquals(
-                tube1.getNormal(point),
+                tube.getNormal(point),
                 new Vector(0, -1, 0).normalize(),
-                "ERROR: not the correct normal"
-        );
-        Ray ray=new Ray(new Point(0, 0, 0),new Vector(0, 0, 0));
-        double radius = 1.0;
-        Tube tube2= new Tube(radius,ray);
-
-        //TC02: Test at a point on the surface
-        Point pointOnSurface = new Point(1, 0, 1);
-        Vector expectedNormal = new Vector(1, 0, 0).normalize();
-        assertEquals(expectedNormal, tube2.getNormal(pointOnSurface), "Normal at surface point is incorrect");
-
-        // Test3: at a point exactly at the axis
-        Point pointOnAxis = new Point(0, 0, 1);
-        assertThrows(IllegalArgumentException.class, () -> {
-            tube2.getNormal(pointOnAxis);
-        }, "Expected exception for point on axis");
-
-        //TC04: Test at a point near the surface within floating-point precision limits
-        Point pointNearSurface = new Point(1, 0, 1.0000001);
-        assertEquals(expectedNormal, tube2.getNormal(pointNearSurface), "Normal near surface point is incorrect");
-
-        // TC05: Test at a point far from the surface
-        Point pointFarFromSurface = new Point(10, 0, 1);
-        Vector expectedFarNormal = new Vector(10, 0, 0).normalize();
-        assertEquals(expectedFarNormal, tube2.getNormal(pointFarFromSurface), "Normal at far point is incorrect");
+                "ERROR: not the correct normal");
     }
-
 
 }

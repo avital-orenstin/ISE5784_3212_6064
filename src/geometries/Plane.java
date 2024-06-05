@@ -2,7 +2,10 @@ package geometries;
 
 import primitives.*;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static primitives.Util.isZero;
 
 /**
  * The Plane class represents a plane in three-dimensional space.
@@ -14,7 +17,7 @@ public class Plane implements Geometry {
     /**
      * A point on the plane.
      */
-    private final Point q;
+    private final Point point;
 
     /**
      * The normal vector to the plane.
@@ -24,11 +27,11 @@ public class Plane implements Geometry {
     /**
      * Constructs a plane with the given point and normal vector.
      *
-     * @param q      A point on the plane.
+     * @param point1      A point on the plane.
      * @param normal The normal vector to the plane.
      */
-    public Plane(Point q, Vector normal) {
-        this.q = q;
+    public Plane(Point point1, Vector normal) {
+        this.point = point1;
         this.normal = normal.normalize();
     }
 
@@ -42,7 +45,7 @@ public class Plane implements Geometry {
     public Plane(Point point1, Point point2, Point point3) {
         Vector myVec1 = point1.subtract(point2);
         Vector myVec2 = point1.subtract(point3);
-        this.q = new Point(point1.xyz);
+        this.point = new Point(point1.xyz);
         this.normal =myVec1.crossProduct(myVec2).normalize();
     }
 
@@ -59,7 +62,7 @@ public class Plane implements Geometry {
     }
 
     @Override
-    public Vector getNormal(Point p) {
+    public Vector getNormal(Point point) {
         return normal;
     }
 
@@ -74,4 +77,29 @@ public class Plane implements Geometry {
     }
 
 
+    @Override
+    public List<Point> findIntersections(Ray ray) {
+        //normal*v
+        double t_denominator = normal.dotProduct(ray.direction);
+        if(ray.head.equals(point))
+            return null;
+        //if the ray is parallel to the plane - there is no intersections points
+        if(t_denominator == 0)
+            return null;
+        //if the ray start in the normal point - there is no intersections points (q0 -p0 is vector 0 , ERROR)
+        if(normal.equals(ray.head))
+            return null;
+        // (normal * (point - p0)) / (normal*v)
+        double t = normal.dotProduct(point.subtract(ray.head)) / t_denominator;
+        Point p;
+        //only if t>0
+        if(!isZero(t) && t>0)
+            //p = p0 + t*v
+            p=ray.getPoint(t);
+        else
+            //if t<=0 there is no intersections points
+            return null;
+        return List.of(p);
+
+    }
 }

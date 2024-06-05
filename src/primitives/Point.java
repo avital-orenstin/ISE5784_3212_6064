@@ -57,7 +57,7 @@ public class Point {
      * @return The point resulting from adding the given vector to this point.
      */
     public Point add(Vector vector) {
-        return new Point(xyz.add(vector.xyz));
+          return new Point(xyz.add(vector.xyz));
     }
 
     /**

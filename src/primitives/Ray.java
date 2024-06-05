@@ -1,6 +1,9 @@
 package primitives;
 
 import java.util.Objects;
+
+import static primitives.Util.isZero;
+
 /**
  * The Ray class represents a ray in three-dimensional space.
  * It consists of a starting point (head) and a direction vector.
@@ -35,7 +38,13 @@ public class Ray {
         if (!(o instanceof Ray ray)) return false;
         return Objects.equals(head, ray.head) && Objects.equals(direction, ray.direction);
     }
+    public Point getPoint(double t)
+    {
+        if(isZero(t))
+            return head;
+        return head.add(direction.scale(t));
 
+    }
     @Override
     public int hashCode() {
         return Objects.hash(head, direction);

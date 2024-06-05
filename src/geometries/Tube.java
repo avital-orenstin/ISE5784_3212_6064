@@ -34,21 +34,24 @@ public class Tube extends RadialGeometry {
     }
 
     @Override
-    public Vector getNormal(Point p) {
+    public Vector getNormal(Point point) {
 
         Point p0 = axis.head;
         Vector v = axis.direction;
         //t = v (P – P0)
-        double t = p.subtract(p0).dotProduct(v);
+        double t = point.subtract(p0).dotProduct(v);
         // O = P0 + tv
         Point o=null;
-        if (!isZero(t)) // if it's close to 0, we'll get ZERO vector exception
-            o = p0.add(v.scale(t));
-        Vector n = p.subtract(o);
+        o=axis.getPoint(t);
+        Vector n = point.subtract(o);
         return n.normalize();
     }
 
 
+    @Override
+    public List<Point> findIntersections(Ray ray) {
+        return null;
+    }
 }
 
 

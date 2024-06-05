@@ -31,10 +31,10 @@ public class Cylinder extends Tube {
     /**
      * Returns the normal vector to a given point on the surface of the cylinder.
      *
-     * @param p The point on the surface of the cylinder for which to compute the normal vector.
+     * @param point The point on the surface of the cylinder for which to compute the normal vector.
      * @return The normal vector to the given point on the surface of the cylinder.
      */
-    public Vector getNormal(Point p) {
-        return super.getNormal(p);
+    public Vector getNormal(Point point) {
+        return super.getNormal(point);
     }
 }
