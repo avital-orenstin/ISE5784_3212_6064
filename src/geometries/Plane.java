@@ -5,6 +5,7 @@ import primitives.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 /**
@@ -76,30 +77,29 @@ public class Plane implements Geometry {
         return normal;
     }
 
-
+    private boolean isPointOnPlane(Point point) {
+        Vector v = point.subtract(this.point);
+        double dotProduct = v.dotProduct(normal);
+        return Math.abs(dotProduct) < 0.00001;
+    }
     @Override
     public List<Point> findIntersections(Ray ray) {
-        //normal*v
         double t_denominator = normal.dotProduct(ray.direction);
-        if(ray.head.equals(point))
-            return null;
         //if the ray is parallel to the plane - there is no intersections points
-        if(t_denominator == 0)
+        if(isZero(t_denominator))
             return null;
-        //if the ray start in the normal point - there is no intersections points (q0 -p0 is vector 0 , ERROR)
-        if(normal.equals(ray.head))
+        if(point.equals(ray.head))
             return null;
-        // (normal * (point - p0)) / (normal*v)
+        // (N * (q0 - p0)) / (N*v)
         double t = normal.dotProduct(point.subtract(ray.head)) / t_denominator;
         Point p;
         //only if t>0
         if(!isZero(t) && t>0)
             //p = p0 + t*v
-            p=ray.getPoint(t);
+            p = ray.getPoint(t);
         else
             //if t<=0 there is no intersections points
             return null;
         return List.of(p);
-
     }
 }
