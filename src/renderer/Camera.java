@@ -42,6 +42,14 @@ public class Camera implements Cloneable {
      * The distance between the camera and the virtual display screen.
      */
     private double distanceToScreen;
+    /**
+     * *********************************************************** display screen.
+     */
+    private ImageWriter imageWriter;
+    /**
+     * *********************************************************** display screen.
+     */
+    private RayTracerBase rayTracer;
 
     /**
      * Default constructor.
@@ -187,7 +195,15 @@ public class Camera implements Cloneable {
             camera.distanceToScreen = distance;
             return this;
         }
+        public Builder withImageWriter(ImageWriter myimageWriter) {
+            camera.imageWriter=myimageWriter;
+            return this;
+        }
 
+        public Builder withRayTracer(RayTracerBase myrayTracer) {
+            camera. rayTracer=myrayTracer;
+            return this;
+        }
         /**
          * Builds a new Camera object.
          *

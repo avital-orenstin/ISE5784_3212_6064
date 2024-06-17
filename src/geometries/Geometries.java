@@ -21,6 +21,7 @@ public class Geometries implements Intersectable{
     }
     public  void add(Intersectable ... geometries)
     {
+
         Collections.addAll(this.geometries,geometries);
     }
     @Override
