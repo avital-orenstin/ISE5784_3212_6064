@@ -6,11 +6,6 @@ import scene.Scene;
 
 public class SimpleRayTracer extends RayTracerBase {
 
-    /**
-     * בנאי פשוט של מעקב קרניים.
-     *
-     * @param scene הסצנה שבה רוצים לבצע עקיבה אחר קרני אור
-     */
     public SimpleRayTracer(Scene scene) {
         super(scene);
     }

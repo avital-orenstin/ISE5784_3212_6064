@@ -5,10 +5,10 @@ import primitives.Ray;
 
 public abstract class RayTracerBase {
 
-    // שדה סצנה בהרשאה protected
+
     protected Scene scene;
 
-    // בנאי המקבל בפרמטר אובייקט של סצנה
+
     public RayTracerBase(Scene scene) {
         this.scene = scene;
     }

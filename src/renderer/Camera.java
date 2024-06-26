@@ -1,4 +1,6 @@
+
 package renderer;
+import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
 import primitives.Ray;
@@ -67,7 +69,7 @@ public class Camera implements Cloneable {
     /**
      * The get functions.
      **/
-     public Vector getUpDirection() {
+    public Vector getUpDirection() {
         return v_Up;
     }
 
@@ -83,8 +85,16 @@ public class Camera implements Cloneable {
         return width;
     }
 
-    public double getDistanceToScreen() {
-        return distanceToScreen;
+    public ImageWriter getImageWriter() {
+        return imageWriter;
+    }
+
+    public Point getlocation() {
+        return location;
+    }
+
+    public RayTracerBase getRayTracer() {
+        return rayTracer;
     }
 
     // getBuilder
@@ -101,6 +111,46 @@ public class Camera implements Cloneable {
     public static class Builder {
 
         private final Camera camera; // Private and final Camera field
+
+        public Builder renderImage() {
+            if (camera == null || camera.imageWriter == null || camera.rayTracer == null) {
+                throw new IllegalStateException("Camera, ImageWriter and RayTracer cannot be null");
+            }
+
+            // Check for zero image height and throw an exception
+            if (camera.imageWriter.getNy() == 0) {
+                throw new IllegalArgumentException("Image height cannot be zero");
+            }
+
+            for (int i = 0; i < camera.imageWriter.getNx(); i++) {
+                for (int j = 0; j < camera.imageWriter.getNy(); j++) {
+                    // Construct a ray passing through the center of the specified pixel
+                    Ray ray = camera.constructRay(camera.imageWriter.getNx(), camera.imageWriter.getNy(), i, j);
+
+                    // Trace the ray and get the color
+                    Color color = camera.rayTracer.traceRay(ray);
+
+                    // Write the color to the image buffer
+                    camera.imageWriter.writePixel(i, j, color);
+                }
+            }
+            return this;
+        }
+
+        public Builder printGrid(int interval, Color color) {
+            for (int i = 0; i < camera.imageWriter.getNx(); i += interval) {
+                for (int j = 0; j < camera.imageWriter.getNy(); j += interval) {
+                    camera.imageWriter.writePixel(i, j, color);
+                }
+            }
+            return this;
+
+        }
+
+        public Builder writeToImage() {
+            camera.imageWriter.writeToImage();
+            return this;
+        }
 
         /**
          * Default constructor.
@@ -195,15 +245,18 @@ public class Camera implements Cloneable {
             camera.distanceToScreen = distance;
             return this;
         }
-        public Builder withImageWriter(ImageWriter myimageWriter) {
+        //***************************************************
+        public Builder setImageWriter(ImageWriter myimageWriter) {
             camera.imageWriter=myimageWriter;
             return this;
         }
+        //***************************************************
 
-        public Builder withRayTracer(RayTracerBase myrayTracer) {
+        public Builder setRayTracer(RayTracerBase myrayTracer) {
             camera. rayTracer=myrayTracer;
             return this;
         }
+
         /**
          * Builds a new Camera object.
          *
@@ -212,7 +265,7 @@ public class Camera implements Cloneable {
          */
         public Camera build() {
             //------------Test with zero values----------
-            String missingData="missingData";
+            String missingData="missing data for camera ";
             if (camera.location == null) {
                 throw new MissingResourceException(missingData , Camera.class.getName(), "camera location");
             }
@@ -231,9 +284,14 @@ public class Camera implements Cloneable {
             if (camera.distanceToScreen <=0.0) {
                 throw new MissingResourceException(missingData, Camera.class.getName(), "camera distanceToScreen");
             }
+            if (camera.imageWriter == null)
+                throw new MissingResourceException(missingData, Camera.class.getName(),"camera imageWriter ");
+            if (camera.rayTracer == null)
+                throw new MissingResourceException(missingData, Camera.class.getName(),"camera rayTracer ");
+
             //-----------Calculation of V_Right-----------
             camera.v_Right= camera.v_To.crossProduct(camera.v_Up).normalize();
-            //---------Checks whether all vectors are perpendicular to each othe-------
+            //---------Checks whether all vectors are perpendicular to each other-------
             if (camera.v_Right.crossProduct(camera.v_To) == null) {
                 throw new IllegalArgumentException("Vector V_To is not perpendicular to vector V_Right");
             }
@@ -311,7 +369,42 @@ public class Camera implements Cloneable {
         return new Ray(location, pCenterPixel.subtract(location));
     }
 
+
+    private void castRay(int resolution, int pixel) {
+        if (resolution <= 0 || imageWriter.getNy() <= 0) {
+            throw new IllegalArgumentException("Invalid resolution or imageWriter.getHeight(): " + resolution + ", " + imageWriter.getNy());
+        }
+
+        // Calculate normalized coordinates
+        double imageHeight = imageWriter.getNy();
+        int pixelX = pixel % resolution;
+        int pixelY = pixel / resolution;
+        double x = pixelX / ((double) resolution - 1);
+        double y = 1.0 - pixelY / (imageHeight - 1);
+
+        // Calculate point on ViewPlane based on normalized coordinates
+        Point viewPlanePoint = new Point(x, y, 0);
+
+        // Retrieve camera position (assuming getter exists)
+        Point cameraPosition = getlocation();
+
+        // Assume camera orientation or direction is known or set externally
+        // For example, if camera always points in a certain direction:
+        Vector cameraDirection = new Vector(0, 0, -1); // Example direction (z-axis negative)
+
+        // Construct ray with point and direction vector
+        Ray ray = constructRay(viewPlanePoint, cameraPosition, cameraDirection);
+
+        // Trace the ray and get the color
+        Color color = rayTracer.traceRay(ray);
+
+        // Write the color to the image buffer
+        imageWriter.writePixel(pixelX, pixelY, color);
+
     }
+
+
+}
 
 
 

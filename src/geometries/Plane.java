@@ -91,7 +91,7 @@ public class Plane implements Geometry {
         if(point.equals(ray.head))
             return null;
         // (N * (q0 - p0)) / (N*v)
-        double t = normal.dotProduct(point.subtract(ray.head)) / t_denominator;
+        double t = alignZero(normal.dotProduct(point.subtract(ray.head)) / t_denominator);
         Point p;
         //only if t>0
         if(!isZero(t) && t>0)

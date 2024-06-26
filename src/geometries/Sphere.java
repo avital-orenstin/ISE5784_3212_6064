@@ -7,6 +7,7 @@ import primitives.Vector;
 import java.util.ArrayList;
 import java.util.List;
 
+import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 /**
@@ -49,6 +50,7 @@ public class Sphere extends RadialGeometry {
             p0 = new Point(ray.head.xyz.d1 + 0.1111111115, ray.head.xyz.d2, ray.head.xyz.d3);
         else
             p0 = new Point(ray.head.xyz);
+
         Ray myray = new Ray(p0,ray.direction);
         // Calculate the vector from the ray's starting point to the sphere's center
         Vector u = center.subtract(p0);
@@ -57,8 +59,8 @@ public class Sphere extends RadialGeometry {
         double tm = myray.direction.dotProduct(u);
 
         // Calculate d^2, the squared distance from the sphere's center to the ray
-        double d = u.lengthSquared() - tm * tm;
-        d=Math.sqrt(d);
+        double d = alignZero(u.lengthSquared() - tm * tm);
+        d=alignZero(Math.sqrt(d));
         // If d^2 is greater than the radius squared, there's no intersection
         if (d >= radius) {
             return null;
@@ -73,7 +75,7 @@ public class Sphere extends RadialGeometry {
 
         if(t1 == t2)
             t2 = -1; //that`s for that it will not return the same point twice
-         //Check if the points are valid (i.e., t > 0) and return the appropriate list
+        //Check if the points are valid (i.e., t > 0) and return the appropriate list
         if (t1 > 0 && t2 > 0) {
             return List.of(p0.add(myray.direction.scale(t1)), p0.add(myray.direction.scale(t2)));
         } else if (t1 > 0) {
@@ -86,4 +88,3 @@ public class Sphere extends RadialGeometry {
 
     }
 }
-//myray.getpoint(t1)

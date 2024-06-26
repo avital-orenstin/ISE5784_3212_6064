@@ -45,7 +45,7 @@ public class Triangle extends Polygon {
         double sign2 = ray.direction.dotProduct(N2);
         //v*N3
         double sign3 = ray.direction.dotProduct(N3);
-        // if one or more are 0.0 – no intersection
+        // if one or more are 0.0 – there are no intersection.
         alignZero(sign1);
         alignZero(sign2);
         alignZero(sign3);
@@ -54,6 +54,7 @@ public class Triangle extends Polygon {
         {
           return intsersection;
         }
+        //if there are no intersection.
         return null;
     }
 }
