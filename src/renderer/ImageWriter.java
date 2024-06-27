@@ -32,6 +32,13 @@ public class ImageWriter {
    /** logger for reporting I/O failures */
    private Logger              logger      = Logger.getLogger("ImageWriter");
 
+   public ImageWriter() {
+      this.imageName = imageName;
+      this.nX        = nX;
+      this.nY        = nY;
+
+      image          = new BufferedImage(nX, nY, BufferedImage.TYPE_INT_RGB);
+   }
    // ***************** Constructors ********************** //
    /** Image Writer constructor accepting image name and View Plane parameters,
     * @param imageName the name of png file
@@ -41,7 +48,6 @@ public class ImageWriter {
       this.imageName = imageName;
       this.nX        = nX;
       this.nY        = nY;
-
       image          = new BufferedImage(nX, nY, BufferedImage.TYPE_INT_RGB);
    }
 
