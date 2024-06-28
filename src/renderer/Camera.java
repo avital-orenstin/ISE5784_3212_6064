@@ -42,22 +42,18 @@ public class Camera implements Cloneable {
      */
     private double distanceToScreen=0;
     /**
-     * *********************************************************** display screen.
+     *The image writer for the actual picture.
      */
     private ImageWriter imageWriter;
     /**
-     * *********************************************************** display screen.
+     * rayTracer gets a ray and returns all intersection points between the ray and geometries in the scene.
      */
     private RayTracerBase rayTracer;
-    /**
-     *
-     *********************************************************** display screen.
-     */
+
     private static final String MISSING_RENDERING_DATA = "missing rendering data";
-    /**
-     * *********************************************************** display screen.
-     */
+
     private static final String CAMERA_CLASS_NAME = "Camera";
+
      /**
      * Default constructor.
      */
@@ -206,8 +202,9 @@ public class Camera implements Cloneable {
         imageWriter.writeToImage();
     }
 
-
-
+    /**
+     * The Builder class for constructing Camera instances.
+     */
 
     public static class Builder {
 
@@ -383,7 +380,6 @@ public class Camera implements Cloneable {
             camera.rayTracer = rayTracer;
             return this;
         }
-
 
 
     }

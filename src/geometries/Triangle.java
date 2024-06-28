@@ -25,6 +25,8 @@ public class Triangle extends Polygon {
         super(vertices);
     }
 
+    @Override
+
     public List<Point> findIntersections(Ray ray) {
         List<Point> intsersection = (List<Point>) this.plane.findIntersections(ray);
         //v1 = p1 - p0

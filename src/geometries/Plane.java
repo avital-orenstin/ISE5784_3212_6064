@@ -13,7 +13,7 @@ import static primitives.Util.isZero;
  * A plane is defined by a point on the plane and its normal vector.
  * @author Avital Orenshtein and Isca Fitousi
  */
-public class Plane implements Geometry {
+public class Plane extends Geometry {
 
     /**
      * A point on the plane.

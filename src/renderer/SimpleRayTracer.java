@@ -8,10 +8,15 @@ import scene.Scene;
 import java.util.List;
 
 /**
- * SimpleRayTracer class represents a simple ray tracer
-
+ * The `SimpleRayTracer` class implements a basic ray tracing algorithm.
+ * It inherits from the abstract `RayTracerBase` class and overrides the `traceRay` method to perform ray-tracing calculations.
  */
 public class SimpleRayTracer extends RayTracerBase {
+    /**
+     * Constructor that initializes the `SimpleRayTracer` with a reference to the scene it operates on.
+     *
+     * @param scene The scene object containing the geometries and lighting information.
+     */
     public SimpleRayTracer(Scene scene) {
         super(scene);
     }
