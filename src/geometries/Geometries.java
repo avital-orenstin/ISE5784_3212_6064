@@ -1,9 +1,7 @@
 package geometries;
 
-import primitives.Point;
 import primitives.Ray;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -44,22 +42,17 @@ public class Geometries extends Intersectable{
     {
         Collections.addAll(this.geometries,geometries);
     }
-    @Override
-    public List<Point> findIntersections(Ray ray) {
 
-        LinkedList<Point> intersections = new LinkedList<Point>();
-        // temp - for save the points in the i geometry
-        List<Point> temp;
-        for (Intersectable i : geometries) {
-            temp = i.findIntersections(ray);
-            if (temp != null) {
-                // if there are intersection points with i geometry - copy all these points to intersections list
-                intersections.addAll(temp);
+    @Override
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        List<GeoPoint> allIntersections = new LinkedList<>();
+        for (Intersectable geometry : geometries) {
+            List<GeoPoint> geometryIntersections = geometry.findGeoIntersectionsHelper(ray);
+            if (geometryIntersections != null) {
+                allIntersections.addAll(geometryIntersections);
             }
         }
-        if (intersections.isEmpty())
-            return null;
-        return intersections;
-
+        return allIntersections.isEmpty() ? null : allIntersections;
     }
 }
+

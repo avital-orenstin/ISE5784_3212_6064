@@ -138,12 +138,12 @@ class VectorTest {
     @Test
     void testNormalize() {
         Vector v = new Vector(1, 2, 3);
-        Vector u = v.normalize();
+        v.normalize();
 
         // ============ Equivalence Partitions Tests ==============
         // TC01: Normalizing a vector.
         assertNotEquals(
-                isZero(u.length() - 1),
+                isZero(v.length() - 1),
                 "ERROR: the normalized vector is not a unit vector");
 
     }

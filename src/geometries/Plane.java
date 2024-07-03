@@ -1,8 +1,9 @@
 package geometries;
 
-import primitives.*;
+import primitives.Point;
+import primitives.Ray;
+import primitives.Vector;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static primitives.Util.alignZero;
@@ -28,7 +29,7 @@ public class Plane extends Geometry {
     /**
      * Constructs a plane with the given point and normal vector.
      *
-     * @param point1      A point on the plane.
+     * @param point1 A point on the plane.
      * @param normal The normal vector to the plane.
      */
     public Plane(Point point1, Vector normal) {
@@ -47,7 +48,7 @@ public class Plane extends Geometry {
         Vector myVec1 = point1.subtract(point2);
         Vector myVec2 = point1.subtract(point3);
         this.point = new Point(point1.xyz);
-        this.normal =myVec1.crossProduct(myVec2).normalize();
+        this.normal = myVec1.crossProduct(myVec2).normalize();
     }
 
     /**
@@ -82,24 +83,43 @@ public class Plane extends Geometry {
         double dotProduct = v.dotProduct(normal);
         return Math.abs(dotProduct) < 0.00001;
     }
+
     @Override
-    public List<Point> findIntersections(Ray ray) {
-        double t_denominator = normal.dotProduct(ray.direction);
-        //if the ray is parallel to the plane - there is no intersections points
-        if(isZero(t_denominator))
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        List<GeoPoint> intersections = null;
+
+        // Check if the ray's head is on the plane
+        if (point.equals(ray.head)) {
+            return null; // No intersection
+        }
+
+        // Calculate the normalized direction vector from the ray's head to the point representing the plane
+        Vector vectorToPlane = point.subtract(ray.head).normalize();
+
+        // Dot product between the ray's direction vector and the normalized direction vector to calculate t
+        double t = alignZero(normal.dotProduct(vectorToPlane));
+
+        // If t is close to zero, the ray is parallel to the plane - no intersection
+        if (isZero(t)) {
             return null;
-        if(point.equals(ray.head))
+        }
+
+        // Calculate the distance along the ray by multiplying t by the ray's direction
+        double distanceOnRay = t * ray.direction.length();
+
+        // Check if the distance is positive (intersection happens before the ray's head)
+        if (distanceOnRay <= 0) {
             return null;
-        // (N * (q0 - p0)) / (N*v)
-        double t = alignZero(normal.dotProduct(point.subtract(ray.head)) / t_denominator);
-        Point p;
-        //only if t>0
-        if(!isZero(t) && t>0)
-            //p = p0 + t*v
-            p = ray.getPoint(t);
-        else
-            //if t<=0 there is no intersections points
-            return null;
-        return List.of(p);
+        }
+
+        // Intersection point on the ray
+        Point intersectionPoint = ray.getPoint(distanceOnRay);
+
+        // Return a list with a GeoPoint object containing the intersection point and the plane as geometry
+        intersections = List.of(new GeoPoint(this, intersectionPoint));
+
+        return intersections;
     }
+
+
 }

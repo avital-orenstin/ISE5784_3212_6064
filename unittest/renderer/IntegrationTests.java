@@ -3,15 +3,19 @@
  */
 package renderer;
 
-import geometries.*;
+import geometries.Geometry;
+import geometries.Plane;
+import geometries.Sphere;
+import geometries.Triangle;
 import org.junit.jupiter.api.Test;
-import primitives.*;
-import renderer.*;
+import primitives.Point;
+import primitives.Ray;
+import primitives.Vector;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Integration tests for ray tracing functionality.
@@ -42,7 +46,7 @@ class RayIntegrationTest {
      * Tests the intersection calculation with a plane.
      */
     @Test
-    void testPlan() {
+    void testPlane() {
         Camera camera = Camera.getBuilder()
                 .setDirection(new Vector(0, 0, -1), new Vector(0, -1, 0))
                 .setLocation(new Point(0, 0, 0))

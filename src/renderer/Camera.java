@@ -1,8 +1,11 @@
 package renderer;
-import primitives.*;
+
+import primitives.Color;
+import primitives.Point;
+import primitives.Ray;
+import primitives.Vector;
+
 import java.util.MissingResourceException;
-import java.lang.Cloneable;
-import renderer.*;
 
 import static primitives.Util.isZero;
 
@@ -92,39 +95,39 @@ public class Camera implements Cloneable {
         return super.clone();
     }
     /**
-     * Calculates the center point of a pixel in screen coordinates.
-     * @param nX The number of pixels along the x-axis.
-     * @param nY The number of pixels along the y-axis.
-     * @param j The index of the pixel along the x-axis.
-     * @param i The index of the pixel along the y-axis.
-     * @return The center point of the specified pixel.
+     * Calculates the center point of a pixel in world coordinates.
+     *
+     * @param nX the number of pixels in the X direction.
+     * @param nY the number of pixels in the Y direction.
+     * @param j the X index of the pixel.
+     * @param i the Y index of the pixel.
+     * @return the center point of the pixel in world coordinates.
      */
     private Point CalculateCenterPointInPixel(int nX, int nY, int j, int i) {
         // Calculate the center point of the screen in world coordinates
-        Point pC = location.add(v_To.scale(distanceToScreen));
-        // Initialize the pixel point with the center point
-        Point pIJ = pC;
+        Point pixelCenter = location.add(v_To.scale(distanceToScreen));
 
         // Calculate the ratio of pixel height and width
-        double rY = height / nY;
-        double rX = width / nX;
+        double pixelHeightRatio = height / nY;
+        double pixelWidthRatio = width / nX;
 
         // Calculate the y-coordinate of the pixel
-        double yI = -(i - (nY - 1) / 2d) * rY;
+        double pixelY = -(i - (nY - 1) / 2d) * pixelHeightRatio;
         // Calculate the x-coordinate of the pixel
-        double xJ = (j - (nX - 1) / 2d) * rX;
+        double pixelX = (j - (nX - 1) / 2d) * pixelWidthRatio;
 
         // Adjust the pixel point along the x-axis if necessary
-        if (!isZero(xJ)) {
-            pIJ = pIJ.add(v_Right.scale(xJ));
+        if (!isZero(pixelX)) {
+            pixelCenter = pixelCenter.add(v_Right.scale(pixelX));
         }
         // Adjust the pixel point along the y-axis if necessary
-        if (!isZero(yI)) {
-            pIJ = pIJ.add(v_Up.scale(yI));
+        if (!isZero(pixelY)) {
+            pixelCenter = pixelCenter.add(v_Up.scale(pixelY));
         }
 
-        return pIJ; // Return the center point of the pixel
+        return pixelCenter; // Return the center point of the pixel
     }
+
 
     /**
      * Constructs a ray passing through the center of the specified pixel.

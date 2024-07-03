@@ -32,7 +32,8 @@ class SphereTest {
 
         // ============ Equivalence Partitions Tests ==============
         // TC01: Check if the normal vector is calculated correctly
-        assertEquals(new Vector(1, 1, 1).normalize(),
+        assertEquals(
+                new Vector(1, 1, 1).normalize(),
                 sphere.getNormal(new Point(3, 4, 5)),
                 "Normal vector is not calculated correctly");
 
@@ -83,7 +84,10 @@ class SphereTest {
         // TC03: Ray starts inside the sphere (1 point)
         Point p3 = new Point(1.8867496997597595, 0.4622498999199199, 0);
         List<Point> result_3 = sphere.findIntersections(new Ray(new Point(1d/2, 0, 0), new Vector(3, 1, 0)));
-        assertEquals( 1, result_3.size(),"Wrong number of points");
+        assertEquals(
+                1,
+                result_3.size(),
+                "Wrong number of points");
         assertEquals(
                 p3,
                 result_3.get(0),
@@ -107,7 +111,7 @@ class SphereTest {
                 "Wrong number of points");
         assertEquals(
                 p4,
-                result_5.get(0),
+                result_5.getFirst(),
                 "Ray starts at sphere and goes inside");
 
         ///TC06: Ray starts at sphere and goes outside (0 points)

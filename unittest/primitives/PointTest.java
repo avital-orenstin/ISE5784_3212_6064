@@ -48,7 +48,6 @@ class PointTest {
     void testAdd() {
         Vector v1 = new Vector(1, 2, 3);
         Vector v1Opposite = new Vector(-1, -2, -3);
-        Vector v2 = new Vector(-2, -4, -6);
 
         // =============== Boundary Values Tests ==================
         // TC01: Adding a vector to its opposite
@@ -60,7 +59,7 @@ class PointTest {
         // TC02: Adding vectors
         assertEquals(
                 v1Opposite,
-                v1.add(v2),
+                v1.add(new Vector(-2, -4, -6)),
                 "ERROR: Vector + Vector does not work correctly");
     }
     /** Test method for {@link primitives.Point#distanceSquared(primitives.Point)}. */

@@ -1,5 +1,8 @@
 package geometries;
-import primitives.*;
+
+import primitives.Point;
+import primitives.Ray;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -8,15 +11,39 @@ import java.util.Objects;
  */
 public abstract class Intersectable {
     /**
-     * Find intersections of a ray with the geometry
-     * @param ray the ray to intersect with
-     * @return list of intersection points or null if no intersections found
+     * Finds all intersection points between the geometry and the given ray.
+     *
+     * @param ray The ray to check for intersections with.
+     * @return A list of intersection points, or an empty list if there are no intersections.
      */
-    public abstract List<Point> findIntersections(Ray ray);
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
+        return findGeoIntersectionsHelper(ray);
+    }
+
+    /**
+     * A helper method for finding intersection points between the geometry and the given ray.
+     * This method is implemented by subclasses.
+     *
+     * @param ray The ray to check for intersections with.
+     * @return A list of intersection points, or an empty list if there are no intersections.
+     */
+
+    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
+
     /**
      * Represents a geometric point with an associated geometry and position.
      * This is an internal class and should not be used directly.*
      */
+    /**
+     * @param ray to find intersections points with the geomtry
+     * @return list of the intersections points with the geomtry
+     */
+    public List<Point> findIntersections(Ray ray) {
+        var geoList = findGeoIntersections(ray);
+        return geoList == null ? null : geoList.stream().map(gp -> gp.point).toList();
+    }
+
+
     public static class GeoPoint {
 
         /**
@@ -37,29 +64,12 @@ public abstract class Intersectable {
          * @param point The position of the point in 3D space.
          */
 
-        GeoPoint(Geometry geometry, Point point) {
+        public GeoPoint(Geometry geometry, Point point) {
             this.geometry = geometry;
             this.point = point;
         }
 
-        /**
-         * Finds all intersection points between the geometry and the given ray.
-         *
-         * @param ray The ray to check for intersections with.
-         * @return A list of intersection points, or an empty list if there are no intersections.
-         */
-        public List<GeoPoint> findGeoIntersections(Ray ray) {
-            return findGeoIntersectionsHelper(ray);
-        }
 
-        /**
-         * A helper method for finding intersection points between the geometry and the given ray.
-         * This method is implemented by subclasses.
-         *
-         * @param ray The ray to check for intersections with.
-         * @return A list of intersection points, or an empty list if there are no intersections.
-         */
-        protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
 
 
         @Override

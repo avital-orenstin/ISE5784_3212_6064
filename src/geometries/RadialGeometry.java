@@ -1,6 +1,8 @@
 package geometries;
 
-import primitives.*;
+import primitives.Ray;
+
+import java.util.List;
 
 /**
  * The RadialGeometry abstract class represents a radial geometry shape in three-dimensional space.
@@ -22,4 +24,6 @@ public abstract class RadialGeometry extends Geometry {
     public RadialGeometry(double radius) {
         this.radius = radius;
     }
+
+    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
 }
