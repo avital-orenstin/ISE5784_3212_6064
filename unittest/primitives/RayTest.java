@@ -77,7 +77,7 @@ class RayTest {
         lst.add(new Point(-1, 1, -99));
         lst.add(new Point(0.5, 0, -100));
 
-        assertEquals(lst.get(0), ray.findClosestPoint(lst), "The first point isn't te closest to the beginning of the ray");
+        assertEquals(lst.getFirst(), ray.findClosestPoint(lst), "The first point isn't te closest to the beginning of the ray");
 
         // TC03: The last point is closest to the beginning of the ray
         lst = new LinkedList<Point>();

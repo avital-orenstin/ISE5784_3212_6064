@@ -47,7 +47,7 @@ public class RayIntegrationTest {
      * Tests the intersection calculation with a plane.
      */
     @Test
-    void testPlan() {
+    void testPlane() {
         Camera camera = Camera.getBuilder()
                 .setDirection(new Vector(0, 0, -1), new Vector(0, -1, 0))
                 .setLocation(new Point(0, 0, 0))

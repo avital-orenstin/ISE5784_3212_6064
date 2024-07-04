@@ -11,7 +11,6 @@ import static primitives.Util.alignZero;
 /**
  * The Sphere class represents a sphere in three-dimensional space.
  * A sphere is a special type of radial geometry shape with a center point and a radius.
- *
  * @author Isca Fitousi and Avital Orenstin.
  */
 public class Sphere extends RadialGeometry {
@@ -24,13 +23,14 @@ public class Sphere extends RadialGeometry {
     /**
      * Constructs a sphere with the specified radius.
      *
-     * @param center -the center point of the sphere.
      * @param radius -the radius of the sphere.
+     * @param center -the center point of the sphere.
      */
-    public Sphere(Point center, double radius) {
+    public Sphere(double radius, Point center) {
         super(radius);
         this.center = center;
     }
+
 
 
     @Override
@@ -39,28 +39,28 @@ public class Sphere extends RadialGeometry {
         return n.normalize();
     }
 
-
     @Override
-    public List<Point> findIntersections(Ray ray) {
-        Point p0;
-        //if the ray starts at the center add epsilon
-        if (center.equals(ray.head))
-            p0 = new Point(ray.head.xyz.d1 + 0.1111111115, ray.head.xyz.d2, ray.head.xyz.d3);
-        else
-            p0 = new Point(ray.head.xyz);
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        List<GeoPoint> intersections = null;
 
-        Ray myray = new Ray(p0, ray.direction);
+        // if the ray starts at the center add epsilon
+        if (center.equals(ray.head)) {
+            intersections = List.of(new GeoPoint(this, ray.getPoint(radius)));
+            return intersections;
+        }
+
         // Calculate the vector from the ray's starting point to the sphere's center
-        Vector u = center.subtract(p0);
+        Vector u = center.subtract(ray.head);
 
         // Calculate the projection of u on the ray direction vector v
-        double tm = myray.direction.dotProduct(u);
+        double tm = ray.direction.dotProduct(u);
 
         // Calculate d^2, the squared distance from the sphere's center to the ray
         double d = alignZero(u.lengthSquared() - tm * tm);
         d = alignZero(Math.sqrt(d));
+
         // If d^2 is greater than the radius squared, there's no intersection
-        if (d >= radius) {
+        if (d >= radius * radius) {
             return null;
         }
 
@@ -71,18 +71,20 @@ public class Sphere extends RadialGeometry {
         double t1 = tm + th;
         double t2 = tm - th;
 
-        if (t1 == t2)
-            t2 = -1; //that`s for that it will not return the same point twice
-        //Check if the points are valid (i.e., t > 0) and return the appropriate list
-        if (t1 > 0 && t2 > 0) {
-            return List.of(p0.add(myray.direction.scale(t1)), p0.add(myray.direction.scale(t2)));
-        } else if (t1 > 0) {
-            return List.of(myray.getPoint(t1));
-        } else if (t2 > 0) {
-            return List.of(p0.add(myray.direction.scale(t2)));
-        } else {
+        // Check for negative distances (no intersection behind the ray)
+        if (alignZero(t2) <= 0 && alignZero(t1) <= 0) {
             return null;
         }
 
+        // If there's only one intersection point
+        if (alignZero(t2) <= 0) {
+            intersections = List.of(new GeoPoint(this, ray.getPoint(t1)));
+        } else {
+            intersections = List.of(new GeoPoint(this, ray.getPoint(t1)), new GeoPoint(this, ray.getPoint(t2)));
+        }
+
+        return intersections;
     }
+
+
 }

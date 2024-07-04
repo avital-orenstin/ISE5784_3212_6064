@@ -11,13 +11,10 @@ import static primitives.Util.isZero;
 
 /**
  * The Camera class will use the builder design template
- *
  * @author Isca Fitousi and Avital Orenstin.
  */
 
 public class Camera implements Cloneable {
-    private static final String MISSING_RENDERING_DATA = "missing rendering data";
-    private static final String CAMERA_CLASS_NAME = "Camera";
     /**
      * The camera location.
      */
@@ -38,17 +35,17 @@ public class Camera implements Cloneable {
     /**
      * The height of the camera's virtual display screen.
      */
-    private double height = 0;
+    private double height=0;
     /**
      * The width of the camera's virtual display screen.
      */
-    private double width = 0;
+    private double width=0;
     /**
      * The distance between the camera and the virtual display screen.
      */
-    private double distanceToScreen = 0;
+    private double distanceToScreen=0;
     /**
-     * The image writer for the actual picture.
+     *The image writer for the actual picture.
      */
     private ImageWriter imageWriter;
     /**
@@ -56,18 +53,16 @@ public class Camera implements Cloneable {
      */
     private RayTracerBase rayTracer;
 
-    /**
+    private static final String MISSING_RENDERING_DATA = "missing rendering data";
+
+    private static final String CAMERA_CLASS_NAME = "Camera";
+
+     /**
      * Default constructor.
      */
     private Camera() {
 
     }
-
-    // getBuilder
-    public static Builder getBuilder() {
-        return new Builder();
-    }
-
     /**
      * The get functions.
      **/
@@ -91,64 +86,63 @@ public class Camera implements Cloneable {
         return distanceToScreen;
     }
 
+    // getBuilder
+    public static Builder getBuilder() {
+        return new Builder();
+    }
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-
     /**
-     * Calculates the center point of a pixel in screen coordinates.
+     * Calculates the center point of a pixel in world coordinates.
      *
-     * @param nX The number of pixels along the x-axis.
-     * @param nY The number of pixels along the y-axis.
-     * @param j  The index of the pixel along the x-axis.
-     * @param i  The index of the pixel along the y-axis.
-     * @return The center point of the specified pixel.
+     * @param nX the number of pixels in the X direction.
+     * @param nY the number of pixels in the Y direction.
+     * @param j the X index of the pixel.
+     * @param i the Y index of the pixel.
+     * @return the center point of the pixel in world coordinates.
      */
     private Point CalculateCenterPointInPixel(int nX, int nY, int j, int i) {
         // Calculate the center point of the screen in world coordinates
-        Point pC = location.add(v_To.scale(distanceToScreen));
-        // Initialize the pixel point with the center point
-        Point pIJ = pC;
+        Point pixelCenter = location.add(v_To.scale(distanceToScreen));
 
         // Calculate the ratio of pixel height and width
-        double rY = height / nY;
-        double rX = width / nX;
+        double pixelHeightRatio = height / nY;
+        double pixelWidthRatio = width / nX;
 
         // Calculate the y-coordinate of the pixel
-        double yI = -(i - (nY - 1) / 2d) * rY;
+        double pixelY = -(i - (nY - 1) / 2d) * pixelHeightRatio;
         // Calculate the x-coordinate of the pixel
-        double xJ = (j - (nX - 1) / 2d) * rX;
+        double pixelX = (j - (nX - 1) / 2d) * pixelWidthRatio;
 
         // Adjust the pixel point along the x-axis if necessary
-        if (!isZero(xJ)) {
-            pIJ = pIJ.add(v_Right.scale(xJ));
+        if (!isZero(pixelX)) {
+            pixelCenter = pixelCenter.add(v_Right.scale(pixelX));
         }
         // Adjust the pixel point along the y-axis if necessary
-        if (!isZero(yI)) {
-            pIJ = pIJ.add(v_Up.scale(yI));
+        if (!isZero(pixelY)) {
+            pixelCenter = pixelCenter.add(v_Up.scale(pixelY));
         }
 
-        return pIJ; // Return the center point of the pixel
+        return pixelCenter; // Return the center point of the pixel
     }
+
 
     /**
      * Constructs a ray passing through the center of the specified pixel.
-     *
      * @param nX The number of pixels along the x-axis.
      * @param nY The number of pixels along the y-axis.
-     * @param j  The index of the pixel along the x-axis.
-     * @param i  The index of the pixel along the y-axis.
+     * @param j The index of the pixel along the x-axis.
+     * @param i The index of the pixel along the y-axis.
      * @return The constructed ray passing through the center of the pixel.
      */
     public Ray constructRay(int nX, int nY, int j, int i) {
         // Calculate the center point of the specified pixel
         Point pCenterPixel = CalculateCenterPointInPixel(nX, nY, j, i);
         // Construct a ray from the camera location to the center of the pixel
-        Vector vector = pCenterPixel.subtract(location);
-        return new Ray(location, vector);
+        return new Ray(location, pCenterPixel.subtract(location));
     }
-
     /**
      * Renders the image by casting rays through each pixel and writing the result to the image.
      *
@@ -163,7 +157,6 @@ public class Camera implements Cloneable {
                 castRay(nx, ny, j, i);
         return this;
     }
-
     /**
      * Casts a ray through a specific pixel and writes the color to the image.
      *
@@ -177,7 +170,6 @@ public class Camera implements Cloneable {
         Color color = rayTracer.traceRay(ray);
         imageWriter.writePixel(j, i, color);
     }
-
     /**
      * Prints a grid on the image with the specified interval and color.
      *
@@ -236,7 +228,7 @@ public class Camera implements Cloneable {
          */
         public Builder(Camera camera) {
             try {
-                this.camera = (Camera) camera.clone();
+                this.camera =(Camera)camera.clone();
             } catch (CloneNotSupportedException e) {
                 throw new RuntimeException(e);
             }
@@ -272,7 +264,7 @@ public class Camera implements Cloneable {
             if (myv_up == null) {
                 throw new IllegalArgumentException("Up vector cannot be null");
             }
-            if (myv_up.dotProduct(myv_to) != 0) {
+            if (myv_up.dotProduct(myv_to)!=0) {
                 throw new IllegalArgumentException("Up vector is not orthogonal to direction vector");
             }
             camera.v_To = myv_to.normalize();
@@ -283,7 +275,7 @@ public class Camera implements Cloneable {
         /**
          * Sets the viewport size.
          *
-         * @param width  Width of the viewport
+         * @param width Width of the viewport
          * @param height Height of the viewport
          * @return This Builder object
          * @throws IllegalArgumentException If width or height is negative
@@ -323,27 +315,27 @@ public class Camera implements Cloneable {
          */
         public Camera build() {
             //------------Test with zero values----------
-            String missingData = "missingData";
+            String missingData="missingData";
             if (camera.location == null) {
-                throw new MissingResourceException(missingData, Camera.class.getName(), "camera location");
+                throw new MissingResourceException(missingData , Camera.class.getName(), "camera location");
             }
             if (camera.v_To == null) {
                 throw new MissingResourceException(missingData, Camera.class.getName(), "camera v_to");
             }
-            if (camera.v_Up == null) {
+            if (camera.v_Up== null) {
                 throw new MissingResourceException(missingData, Camera.class.getName(), "camera v_Up");
             }
-            if (camera.height == 0.0) {
+            if (camera.height ==0.0) {
                 throw new MissingResourceException(missingData, Camera.class.getName(), "camera height");
             }
-            if (camera.width == 0.0) {
+            if (camera.width ==0.0) {
                 throw new MissingResourceException(missingData, Camera.class.getName(), "camera width");
             }
-            if (camera.distanceToScreen <= 0.0) {
+            if (camera.distanceToScreen <=0.0) {
                 throw new MissingResourceException(missingData, Camera.class.getName(), "camera distanceToScreen");
             }
             //-----------Calculation of V_Right-----------
-            camera.v_Right = camera.v_To.crossProduct(camera.v_Up).normalize();
+            camera.v_Right= camera.v_To.crossProduct(camera.v_Up).normalize();
             //---------Checks whether all vectors are perpendicular to each othe-------
             if (camera.v_Right.crossProduct(camera.v_To) == null) {
                 throw new IllegalArgumentException("Vector V_To is not perpendicular to vector V_Right");
@@ -351,17 +343,17 @@ public class Camera implements Cloneable {
             if (camera.v_To.crossProduct(camera.v_Up) == null) {
                 throw new IllegalArgumentException("Vector V_Up is not perpendicular to vector v_To");
             }
-            if (camera.v_Right.crossProduct(camera.v_Up) == null) {
+            if (camera.v_Right.crossProduct(camera.v_Up)== null) {
                 throw new IllegalArgumentException("Vector V_Up is not perpendicular to vector V_Right");
             }
             //-----------Checking for incorrect values-----------
-            if (camera.height < 0.0) {
+            if (camera.height <0.0) {
                 throw new IllegalArgumentException("The height cannot be negative");
             }
-            if (camera.width < 0.0) {
+            if (camera.width <0.0) {
                 throw new IllegalArgumentException("The width cannot be negative");
             }
-            if (camera.distanceToScreen < 0.0) {
+            if (camera.distanceToScreen <0.0) {
                 throw new IllegalArgumentException();
             }
             //-----------A copy of an object in the camera field-----------
@@ -371,7 +363,6 @@ public class Camera implements Cloneable {
                 throw new RuntimeException(e);
             }
         }
-
         /**
          * Sets the ImageWriter for the camera.
          *
@@ -382,7 +373,6 @@ public class Camera implements Cloneable {
             camera.imageWriter = imageWriter;
             return this;
         }
-
         /**
          * Sets the RayTracer for the camera.
          *
@@ -399,3 +389,7 @@ public class Camera implements Cloneable {
 
 
 }
+
+
+
+
