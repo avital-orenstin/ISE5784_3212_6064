@@ -1,13 +1,14 @@
 package geometries;
 
-import primitives.*;
+import primitives.Point;
+import primitives.Vector;
 
 /**
  * The Geometry interface represents a geometric shape in three-dimensional space.
  * It defines a method for calculating the normal vector to a given point on the surface of the shape.
  * * @author Isca Fitousi and Avital Orenstin
  */
-public interface Geometry extends Intersectable{
+public interface Geometry extends Intersectable {
 
     /**
      * Calculates and returns the normal vector to a given point on the surface of the geometry.

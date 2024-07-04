@@ -1,23 +1,23 @@
 package primitives;
 
 import org.junit.jupiter.api.Test;
-import primitives.Point;
-import primitives.Vector;
 
-import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.*;
 import static primitives.Util.isZero;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
  * Unit tests for primitives.Point class
+ *
  * @author Isca Fitousi and Avital Orenshtein.
  */
 
 class PointTest {
-    public static final double DELTA=0.0001;
-    /** Test method for {@link primitives.Point#subtract(primitives.Point)}. */
+    public static final double DELTA = 0.0001;
+
+    /**
+     * Test method for {@link primitives.Point#subtract(primitives.Point)}.
+     */
     @Test
     void testSubtract() {
         Point p1 = new Point(1, 2, 3);
@@ -42,7 +42,10 @@ class PointTest {
                 v1.subtract(p2),
                 "ERROR: Vector - Vector does not work correctly");
     }
-    /** Test method for {@link primitives.Point#add(primitives.Vector)}. */
+
+    /**
+     * Test method for {@link primitives.Point#add(primitives.Vector)}.
+     */
 
     @Test
     void testAdd() {
@@ -63,7 +66,10 @@ class PointTest {
                 v1.add(v2),
                 "ERROR: Vector + Vector does not work correctly");
     }
-    /** Test method for {@link primitives.Point#distanceSquared(primitives.Point)}. */
+
+    /**
+     * Test method for {@link primitives.Point#distanceSquared(primitives.Point)}.
+     */
 
     @Test
     void testDistanceSquared() {
@@ -90,7 +96,10 @@ class PointTest {
                 isZero(p3.distanceSquared(p1) - 9),
                 "ERROR: squared distance between points is wrong");
     }
-    /** Test method for {@link primitives.Point#distance(primitives.Point)}. */
+
+    /**
+     * Test method for {@link primitives.Point#distance(primitives.Point)}.
+     */
     @Test
     void testDistance() {
         Point p1 = new Point(1, 2, 3);

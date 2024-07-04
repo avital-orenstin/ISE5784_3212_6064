@@ -1,18 +1,17 @@
 package primitives;
 
-import static java.lang.System.out;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static primitives.Util.isZero;
 
-import org.junit.jupiter.api.Test;
-import primitives.Point;
-import primitives.Vector;
 class VectorTest {
 
     public static final double DELTA = 0.0001;
 
-    /** Test method for {@link primitives.Vector#Vector(double, double, double)} (constructor). */
+    /**
+     * Test method for {@link primitives.Vector#Vector(double, double, double)} (constructor).
+     */
     @Test
     public void testConstructor() {
         // =============== Boundary Values Tests ==================
@@ -23,12 +22,14 @@ class VectorTest {
                 "ERROR: zero vector does not throw an exception");
     }
 
-    /** Test method for {@link primitives.Point#add(primitives.Vector)}. */
+    /**
+     * Test method for {@link primitives.Point#add(primitives.Vector)}.
+     */
     @Test
     void testAdd() {
-        Point  p1         = new Point(1, 2, 3);
-        Point  p2         = new Point(2, 4, 6);
-        Vector v1         = new Vector(1, 2, 3);
+        Point p1 = new Point(1, 2, 3);
+        Point p2 = new Point(2, 4, 6);
+        Vector v1 = new Vector(1, 2, 3);
         Vector v1Opposite = new Vector(-1, -2, -3);
 
         // ============ Equivalence Partitions Tests ==============
@@ -46,7 +47,9 @@ class VectorTest {
                 "ERROR: (point + vector) = center of coordinates does not work correctly");
     }
 
-    /** Test method for {@link primitives.Vector#scale(double)}. */
+    /**
+     * Test method for {@link primitives.Vector#scale(double)}.
+     */
     @Test
     void testScale() {
         Vector v1 = new Vector(1, 2, 3);
@@ -59,12 +62,14 @@ class VectorTest {
                 "ERROR: By multiplying by a scalar");
     }
 
-    /** Test method for {@link primitives.Vector#dotProduct(primitives.Vector)}. */
+    /**
+     * Test method for {@link primitives.Vector#dotProduct(primitives.Vector)}.
+     */
     @Test
     void testDotProduct() {
-        Vector v1         = new Vector(1, 2, 3);
-        Vector v2         = new Vector(-2, -4, -6);
-        Vector v3         = new Vector(0, 3, -2);
+        Vector v1 = new Vector(1, 2, 3);
+        Vector v2 = new Vector(-2, -4, -6);
+        Vector v3 = new Vector(0, 3, -2);
 
         // ============ Equivalence Partitions Tests ==============
         // TC01: Dot product of orthogonal vectors
@@ -80,12 +85,14 @@ class VectorTest {
                 "ERROR: dotProduct() wrong value");
     }
 
-    /** Test method for {@link primitives.Vector#crossProduct(primitives.Vector)}. */
+    /**
+     * Test method for {@link primitives.Vector#crossProduct(primitives.Vector)}.
+     */
     @Test
     void testCrossProduct() {
-        Vector v1         = new Vector(1, 2, 3);
-        Vector v2         = new Vector(-2, -4, -6);
-        Vector v3         = new Vector(0, 3, -2);
+        Vector v1 = new Vector(1, 2, 3);
+        Vector v2 = new Vector(-2, -4, -6);
+        Vector v3 = new Vector(0, 3, -2);
 
         // =============== Boundary Values Tests ==================
         // TC01: Cross product of parallel vectors
@@ -109,7 +116,9 @@ class VectorTest {
                 "ERROR: crossProduct() result is not orthogonal to its operands");
     }
 
-    /** Test method for {@link primitives.Vector#lengthSquared()}. */
+    /**
+     * Test method for {@link primitives.Vector#lengthSquared()}.
+     */
     @Test
     void testLengthSquared() {
         Vector v4 = new Vector(1, 2, 2);
@@ -121,7 +130,9 @@ class VectorTest {
                 "ERROR: lengthSquared() wrong value");
     }
 
-    /** Test method for {@link primitives.Vector#length()}. */
+    /**
+     * Test method for {@link primitives.Vector#length()}.
+     */
     @Test
     void testLength() {
         Vector v4 = new Vector(1, 2, 2);
@@ -134,7 +145,9 @@ class VectorTest {
                 "ERROR: length() wrong value");
     }
 
-    /** Test method for {@link primitives.Vector#normalize()}. */
+    /**
+     * Test method for {@link primitives.Vector#normalize()}.
+     */
     @Test
     void testNormalize() {
         Vector v = new Vector(1, 2, 3);

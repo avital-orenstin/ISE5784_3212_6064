@@ -1,10 +1,10 @@
 package primitives;
 
-import java.lang.Math;
 import java.util.Objects;
 
 /**
  * The Point class represents a point in three-dimensional space.
+ *
  * @author Isca Fitousi and Avital Orenstin.
  */
 
@@ -57,7 +57,7 @@ public class Point {
      * @return The point resulting from adding the given vector to this point.
      */
     public Point add(Vector vector) {
-          return new Point(xyz.add(vector.xyz));
+        return new Point(xyz.add(vector.xyz));
     }
 
     /**
@@ -72,7 +72,7 @@ public class Point {
     }
 
     /**
-     *Calculates the distance between this point and the given point using a function distanceSquared
+     * Calculates the distance between this point and the given point using a function distanceSquared
      * which calculates the squared distance.
      *
      * @param point the point to which the distance should be calculated.

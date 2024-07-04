@@ -1,11 +1,12 @@
 package geometries;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import primitives.Ray;
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
-import geometries.Tube;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
  * Unit tests for the  geometries.Tube class.
  * This class tests the functionality of the getNormal method of the Tube class.

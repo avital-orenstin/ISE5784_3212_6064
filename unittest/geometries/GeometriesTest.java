@@ -4,21 +4,29 @@ import org.junit.jupiter.api.Test;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
-import geometries.Sphere;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class GeometriesTest {
 
     @Test
     void testFindIntersections() {
         //build a list of geometries
-        Sphere sphere = new Sphere(4.0, new Point(1,0,0));
-        Triangle triangle = new Triangle(new Point(-1, 0, 0), new Point(1, 0, 0), new Point(0, 1, 0));
-        Plane plane = new Plane(new Point(1, 0, 0), new Vector(0, 0, 1));
-        Geometries geometries1 = new Geometries(sphere, triangle, plane);
+        Geometries geometries1 = new Geometries(
+                new Sphere(
+                        new Point(1, 0, 0), 4.0),
+                new Triangle(
+                        new Point(-1, 0, 0),
+                        new Point(1, 0, 0),
+                        new Point(0, 1, 0)
+                ),
+                new Plane(
+                        new Point(1, 0, 0), new Vector(0, 0, 1)
+                )
+        );
 
 
         // ============ Equivalence Partitions Tests ==============
@@ -32,10 +40,11 @@ class GeometriesTest {
 
         // =============== Boundary Values Tests ==================
         // TC02: Empty list of geometries (0 points)
-        Geometries geometries2 = new Geometries();
-        List<Point> result2 = geometries2.findIntersections(new Ray(new Point(-1, 0, 0), new Vector(3, 1, 2)));
+        List<Point> result2 = new Geometries().findIntersections(new Ray(new Point(-1, 0, 0), new Vector(3, 1, 2)));
         assertNull(
-                result2,
+                new Geometries().findIntersections(
+                        new Ray(new Point(-1, 0, 0), new Vector(3, 1, 2))
+                ),
                 "Empty list of geometries");
 
         // TC03: No geometry is cut (0 points)
@@ -52,7 +61,7 @@ class GeometriesTest {
                 "Only one geometry is cut");
 
         // TC05: All geometries are cut (4 points)
-        List<Point> result5 = geometries1.findIntersections(new Ray(new Point(0, 1d/2, 5), new Vector(0, 0, -1)));
+        List<Point> result5 = geometries1.findIntersections(new Ray(new Point(0, 1d / 2, 5), new Vector(0, 0, -1)));
         assertEquals(
                 4,
                 result5.size(),

@@ -1,10 +1,9 @@
 package primitives;
 
-import java.lang.Math;
-
 /**
  * The Vector class represents a vector in three-dimensional space.
  * A vector is a directed line segment with magnitude and direction.
+ *
  * @author Isca Fitousi and Avital Orenstin.
  */
 public class Vector extends Point {
@@ -89,7 +88,7 @@ public class Vector extends Point {
      * @return The squared length of this vector.
      */
     public double lengthSquared() {
-        return this.xyz.d1 * this.xyz.d1 +this.xyz.d2* this.xyz.d2+this.xyz.d3* this.xyz.d3;
+        return this.xyz.d1 * this.xyz.d1 + this.xyz.d2 * this.xyz.d2 + this.xyz.d3 * this.xyz.d3;
     }
 
     /**

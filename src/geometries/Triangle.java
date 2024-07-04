@@ -4,7 +4,6 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static primitives.Util.alignZero;
@@ -12,7 +11,8 @@ import static primitives.Util.alignZero;
 /**
  * The Triangle class represents a triangle in three-dimensional space.
  * A triangle is a polygon with three vertices.
- *@author Isca Fitousi and Avital Orenstin
+ *
+ * @author Isca Fitousi and Avital Orenstin
  */
 public class Triangle extends Polygon {
 
@@ -26,7 +26,7 @@ public class Triangle extends Polygon {
     }
 
     public List<Point> findIntersections(Ray ray) {
-        List<Point> intsersection = (List<Point>) this.plane.findIntersections(ray);
+        List<Point> intsersection = plane.findIntersections(ray);
         //v1 = p1 - p0
         Vector v1 = vertices.get(0).subtract(ray.head);
         //v2 = p2 - p0
@@ -50,9 +50,8 @@ public class Triangle extends Polygon {
         alignZero(sign2);
         alignZero(sign3);
         //The point is inside if all v*Ni have the same sign
-        if((sign1 > 0 && sign2 > 0 && sign3 > 0) || (sign1 < 0 && sign2 < 0 && sign3 < 0))
-        {
-          return intsersection;
+        if ((sign1 > 0 && sign2 > 0 && sign3 > 0) || (sign1 < 0 && sign2 < 0 && sign3 < 0)) {
+            return intsersection;
         }
         //if there are no intersection.
         return null;

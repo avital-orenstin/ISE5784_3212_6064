@@ -7,19 +7,19 @@ import primitives.Vector;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 class TriangleTest {
 
     @Test
     void testFindIntersections() {
-        Triangle triangle=new Triangle(new Point(0,0,1),new Point(1,0,0),new Point(-1,0,0));
+        Triangle triangle = new Triangle(new Point(0, 0, 1), new Point(1, 0, 0), new Point(-1, 0, 0));
         // ============ Equivalence Partitions Tests ==============
 
         // TC01: Point inside the triangle (1 point)
         List<Point> result_1 = triangle.findIntersections(new Ray(new Point(0, 1.5, 0), new Vector(-0.15, -1.5, 0.58)));
-        assertEquals( 1,
+        assertEquals(1,
                 result_1.size(),
                 "Wrong number of points");
 
@@ -31,7 +31,7 @@ class TriangleTest {
 
 
         // TC03: Point outside against vertex (0 points)
-        List<Point> result_3 = triangle.findIntersections(new Ray(new Point(-1.57,-0.5,-0.47), new Vector(0, 1.58, 0)));
+        List<Point> result_3 = triangle.findIntersections(new Ray(new Point(-1.57, -0.5, -0.47), new Vector(0, 1.58, 0)));
         assertNull(
                 result_3,
                 "Point outside against vertex");

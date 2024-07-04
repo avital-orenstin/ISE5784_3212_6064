@@ -1,8 +1,8 @@
 package geometries;
 
 import primitives.Point;
-import primitives.Vector;
 import primitives.Ray;
+import primitives.Vector;
 
 /**
  * The Cylinder class represents a cylinder in three-dimensional space.
@@ -23,8 +23,8 @@ public class Cylinder extends Tube {
      *
      * @param radius The radius of the cylinder.
      */
-    public Cylinder(Ray ray,Double radius,Double height) {
-        super(radius,ray);
+    public Cylinder(Ray ray, Double radius, Double height) {
+        super(radius, ray);
         this.height = height;
     }
 

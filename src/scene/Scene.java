@@ -7,8 +7,9 @@ import primitives.Color;
 public class Scene {
     public String name;
     public Color background;
-    public AmbientLight ambientLight= AmbientLight.NONE;
-    public Geometries geometries=new Geometries();
+    public AmbientLight ambientLight = AmbientLight.NONE;
+    public Geometries geometries = new Geometries();
+
     // בנאי
     public Scene(String name) {
         this.name = name;
@@ -31,6 +32,7 @@ public class Scene {
         this.geometries = geometries;
         return this;
     }
+
     public Scene build() {
         // Since all configuration happens during object creation with
         // setter-like methods, we simply return 'this' here.

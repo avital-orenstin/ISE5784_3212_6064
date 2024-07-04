@@ -5,7 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class RayTest {
 
@@ -23,7 +24,7 @@ class RayTest {
                 expectedPoint,
                 actualPoint,
                 "the positive distance not calculated correctly."
-                );
+        );
 
 
         // TC02: Cross product of parallel vectors
@@ -45,6 +46,7 @@ class RayTest {
                 actualPoint,
                 "the distance should be zero.");
     }
+
     /**
      * Test method for {@link Ray#findClosestPoint(List)} .
      */

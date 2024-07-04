@@ -1,11 +1,8 @@
 package geometries;
 
-import primitives.*;
-import static primitives.Util.isZero;
-
 import primitives.Point;
-import primitives.Vector;
 import primitives.Ray;
+import primitives.Vector;
 
 import java.util.List;
 
@@ -13,7 +10,8 @@ import java.util.List;
 /**
  * The Tube class represents a tube in three-dimensional space.
  * A tube is a special type of radial geometry shape with an axis defined by a ray and a radius.
- *@author Isca Fitousi and Avital Orenstin.
+ *
+ * @author Isca Fitousi and Avital Orenstin.
  */
 public class Tube extends RadialGeometry {
 
@@ -26,7 +24,7 @@ public class Tube extends RadialGeometry {
      * Constructs a tube with the specified radius.
      *
      * @param radius The radius of the tube.
-     * @param axis The axis of the tube.
+     * @param axis   The axis of the tube.
      */
     public Tube(double radius, Ray axis) {
         super(radius);
@@ -41,8 +39,8 @@ public class Tube extends RadialGeometry {
         //t = v (P – P0)
         double t = point.subtract(p0).dotProduct(v);
         // O = P0 + tv
-        Point o=null;
-        o=axis.getPoint(t);
+        Point o = null;
+        o = axis.getPoint(t);
         Vector n = point.subtract(o);
         return n.normalize();
     }

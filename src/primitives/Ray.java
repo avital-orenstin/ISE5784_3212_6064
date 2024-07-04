@@ -25,7 +25,8 @@ public class Ray {
     /**
      * Constructs a Ray with the specified head (starting point) and direction.
      * A vector in the direction is always normalized for future calculations.
-     * @param head The starting point of the ray.
+     *
+     * @param head      The starting point of the ray.
      * @param direction The direction vector of the ray.
      */
     public Ray(Point head, Vector direction) {
@@ -39,13 +40,14 @@ public class Ray {
         if (!(o instanceof Ray ray)) return false;
         return Objects.equals(head, ray.head) && Objects.equals(direction, ray.direction);
     }
-    public Point getPoint(double t)
-    {
-        if(isZero(t))
+
+    public Point getPoint(double t) {
+        if (isZero(t))
             return head;
         return head.add(direction.scale(t));
 
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(head, direction);
@@ -58,13 +60,14 @@ public class Ray {
                 ", direction=" + direction +
                 '}';
     }
+
     public Point findClosestPoint(List<Point> points) {
 
         double minDistance = Double.MAX_VALUE;
         double d;
         Point closePoint = null;
 
-        if(points==null){
+        if (points == null) {
             return null;
         }
 

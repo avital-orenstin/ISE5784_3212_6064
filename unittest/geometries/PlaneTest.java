@@ -1,17 +1,19 @@
 package geometries;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Testing Planes.
  * Unit tests for the geometries.Plane class.
  * This class tests the functionality of the Plane class, including its constructor and getNormal method.
+ *
  * @author Isca Fitousi and Avital Orenshtein.
  */
 class PlaneTest {
