@@ -193,5 +193,34 @@ public class LightTest {
                 .renderImage()
                 .writeToImage();
     }
+    @Test
+    public void sphereMultipleLights() {
+        scene1.geometries.add(sphere);
+        scene1.lights.add(new DirectionalLight(new Color(233, 204, 345),new Vector(65,70,50)));
+        scene1.lights.add(new PointLight(new Color(600, 320, 88),new Point(80,-100,46.19832)));
+        scene1.lights.add(new SpotLight(new Color(400, 500, 55), new Point(-10.20919,73.13427,-20),new Vector(-7,-45,61)));
+
+        camera1.setImageWriter(new ImageWriter("sphereMultipleLight", 500, 500))
+                .build()
+                .renderImage()
+                .writeToImage();
+
+
+    }
+
+    /** Produce a picture of two triangles lighted by multiple lights */
+    @Test
+    public void trianglesMultipleLights() {
+        scene2.geometries.add(triangle1, triangle2);
+        scene2.lights.add(new DirectionalLight(new Color(7, 7, 805),new Vector(-65,-70,-50)));
+        scene2.lights.add(new PointLight(new Color(588, 7, 305),new Point(80,-100,-46.19832)));
+        scene2.lights.add(new SpotLight(new Color(800, 300, 123), new Point(-10.20919,-73.13427,-20),new Vector(-7,45,61)));
+
+        camera2.setImageWriter(new ImageWriter("trianglesMultipleLight", 500, 500))
+                .build()
+                .renderImage()
+                .writeToImage();
+
+    }
 
 }

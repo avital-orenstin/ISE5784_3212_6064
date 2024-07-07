@@ -8,16 +8,35 @@ public class Material {
     public Double3 kD = Double3.ZERO;
     // Field represents the
     public Double3 kS = Double3.ZERO;
+    // Field represents the
+    public Double3 kT = Double3.ZERO;
+    // Field represents the
+    public Double3 kR = Double3.ZERO;
     // Field represents the shininess of the material
     public int nShininess = 0;
-
+    public Material setkT(Double3 kT) {
+        this.kT = kT;
+        return this;
+    }
+    public Material setkR(Double3 kR) {
+        this.kR = kR;
+        return this;
+    }
+    public Material setkT(double kT) {
+        this.kT = new Double3(kT);
+        return this;
+    }
+    public Material setkR(double kR) {
+        this.kR =  new Double3(kR);
+        return this;
+    }
     /**
      * Builder patterns setter for field kD
      * @param kD parameter for kD
      * @return Material object
      */
-    public Material setKd(Double3 kD) {
-        this.kD = kD;
+    public Material kR(Double3 kD) {
+        this.kR = kR;
         return this;
     }
 
@@ -30,6 +49,11 @@ public class Material {
         this.kD = new Double3(value);
         return this;
     }
+    public Material setKd(Double3 value) {
+        this.kD = value;
+        return this;
+    }
+
 
     /**
      * Builder patterns setter for field kS
