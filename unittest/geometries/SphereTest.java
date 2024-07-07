@@ -28,7 +28,7 @@ class SphereTest {
 
     @Test
     void testGetNormal() {
-        Sphere sphere = new Sphere(1, new Point(2, 3, 4));
+        Sphere sphere = new Sphere( new Point(2, 3, 4),1);
 
         // ============ Equivalence Partitions Tests ==============
         // TC01: Check if the normal vector is calculated correctly
@@ -48,7 +48,7 @@ class SphereTest {
 
     @Test
     void testFindIntersections() {
-        Sphere sphere = new Sphere(1d, new Point(1, 0, 0));
+        Sphere sphere = new Sphere(new Point(1, 0, 0),1d);
 
         final Point gp1 = new Point(0.0651530771650466, 0.355051025721682, 0);
         final Point gp2 = new Point(1.53484692283495, 0.844948974278318, 0);

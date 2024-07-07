@@ -17,7 +17,7 @@ class GeometriesTest {
         //build a list of geometries
         Geometries geometries1 = new Geometries(
                 new Sphere(
-                        new Point(1, 0, 0), 4.0),
+                         new Point(1, 0, 0),4.0),
                 new Triangle(
                         new Point(-1, 0, 0),
                         new Point(1, 0, 0),

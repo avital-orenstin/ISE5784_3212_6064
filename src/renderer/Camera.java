@@ -152,8 +152,8 @@ public class Camera implements Cloneable {
         int nx = imageWriter.getNx();
         int ny = imageWriter.getNy();
 
-        for (int i = 0; i < nx; ++i)
-            for (int j = 0; j < ny; ++j)
+        for (int i = 0; i < nx; i++)
+            for (int j = 0; j < ny; j++)
                 castRay(nx, ny, j, i);
         return this;
     }

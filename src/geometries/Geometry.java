@@ -15,6 +15,10 @@ public abstract class Geometry extends Intersectable {
      * The emission color of the geometry.
      */
     protected Color emission = Color.BLACK;
+    /**
+     * material of a geometry object
+     */
+    private Material material = new Material();
 
     /**
      * Calculates and returns the normal vector to a given point on the surface of the geometry.
@@ -42,5 +46,23 @@ public abstract class Geometry extends Intersectable {
     public Geometry setEmission(Color emission) {
         this.emission = emission;
         return this;
+    }
+    /**
+     * builder pattern setter for material field
+     *
+     * @param material material value
+     * @return Geometry object
+     */
+    public Geometry setMaterial(Material material) {
+        this.material = material;
+        return this;
+    }
+    /**
+     * getter for the material
+     *
+     * @return material
+     */
+    public Material getMaterial() {
+        return material;
     }
 }
