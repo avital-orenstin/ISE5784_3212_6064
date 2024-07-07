@@ -23,7 +23,6 @@ public abstract class RayTracerBase {
     public RayTracerBase(Scene scene) {
         this.scene = scene;
     }
-
     /**
      * Traces the specified ray in the scene and returns the color computed for that ray.
      * Subclasses must provide an implementation for this method.

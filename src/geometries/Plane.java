@@ -86,18 +86,20 @@ public class Plane extends Geometry {
 
     @Override
     protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        List<GeoPoint> intersections = null;
-
+        double t_denominator = normal.dotProduct(ray.direction);
+        //if the ray is parallel to the plane - there is no intersections points
+        if(isZero(t_denominator))
+            return null;
         // Check if the ray's head is on the plane
         if (point.equals(ray.head)) {
             return null; // No intersection
         }
 
         // Calculate the normalized direction vector from the ray's head to the point representing the plane
-        Vector vectorToPlane = point.subtract(ray.head).normalize();
+        Vector vectorToPlane = point.subtract(ray.head);
 
         // Dot product between the ray's direction vector and the normalized direction vector to calculate t
-        double t = alignZero(normal.dotProduct(vectorToPlane));
+        double t = alignZero(normal.dotProduct(vectorToPlane) / t_denominator);
 
         // If t is close to zero, the ray is parallel to the plane - no intersection
         if (isZero(t)) {
@@ -114,7 +116,7 @@ public class Plane extends Geometry {
 
         // Intersection point on the ray
         Point intersectionPoint = ray.getPoint(distanceOnRay);
-
+        List<GeoPoint> intersections = null;
         // Return a list with a GeoPoint object containing the intersection point and the plane as geometry
         intersections = List.of(new GeoPoint(this, intersectionPoint));
 
