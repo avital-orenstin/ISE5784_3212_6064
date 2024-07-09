@@ -41,35 +41,35 @@ public class Sphere extends RadialGeometry {
 
     @Override
     protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+
         List<GeoPoint> intersections = null;
 
         // if the ray starts at the center add epsilon
-        if (center.equals(ray.head)) {
+        if (center.equals(ray.getHead())){
             intersections = List.of(new GeoPoint(this, ray.getPoint(radius)));
             return intersections;
         }
 
         // Calculate the vector from the ray's starting point to the sphere's center
-        Vector u = center.subtract(ray.head);
+        Vector u = center.subtract(ray.getHead());
 
         // Calculate the projection of u on the ray direction vector v
         double tm = ray.direction.dotProduct(u);
 
         // Calculate d^2, the squared distance from the sphere's center to the ray
-        double d = alignZero(u.lengthSquared() - tm * tm);
-        d = alignZero(Math.sqrt(d));
+        double d = alignZero(Math.sqrt(u.lengthSquared() - tm * tm));
 
         // If d^2 is greater than the radius squared, there's no intersection
-        if (d >= radius) {
+        if (d >= radius)
             return null;
-        }
 
         // Calculate th the distance from the projection to the intersection points
-        double th = Math.sqrt((radius * radius) - (d * d));
+        double th = alignZero(Math.sqrt((radius * radius) - (d * d)));
 
         // Calculate the distances to the intersection points
         double t1 = tm + th;
         double t2 = tm - th;
+
 
         // Check for negative distances (no intersection behind the ray)
         if (alignZero(t2) <= 0 && alignZero(t1) <= 0) {

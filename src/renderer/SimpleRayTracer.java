@@ -9,7 +9,9 @@ import java.util.List;
 import static java.lang.Math.*;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
-
+/**
+ * Simple implementation of the RayTracerBase class for tracing rays in a scene.
+ */
 public class SimpleRayTracer  extends  RayTracerBase{
     private static final double DELTA = 0.1;
     private static final int MAX_CALC_COLOR_LEVEL = 10;
