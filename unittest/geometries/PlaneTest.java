@@ -123,7 +123,7 @@ class PlaneTest {
                         new Vector(1, 0, 0))),
                 "Bad plane intersection");
 
-        // TC02: Ray out of plane
+        //TC02: Ray out of plane
         assertNull(
                 plane.findIntersections(
                         new Ray(new Point(2, 0, 0),

@@ -78,17 +78,23 @@ public class Plane extends Geometry {
         return normal;
     }
 
-
     @Override
-    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        double t_denominator=normal.dotProduct(ray.getDirection());
-        if(isZero(t_denominator) || point.equals(ray.getHead()))
-            return null;
-        double t= (normal.dotProduct(point.subtract(ray.getHead())) / t_denominator);
-        if(isZero(t) || t<0)
-            return null;
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+        double t_denominator = normal.dotProduct(ray.getDirection());
 
-        return List.of(new GeoPoint(this,ray.getPoint(t)));
+        // If the denominator is close to zero or the ray starts from the point on the plane, there is no intersection.
+        if (isZero(t_denominator) || point.equals(ray.getHead())) {
+            return null;
+        }
+
+        double t = alignZero(normal.dotProduct(point.subtract(ray.getHead())) / t_denominator);
+
+        if (t <= 0 || alignZero(t - maxDistance) > 0) {
+            return null;
+        }
+
+        return List.of(new GeoPoint(this, ray.getPoint(t)));
     }
+
 
 }

@@ -25,5 +25,5 @@ public abstract class RadialGeometry extends Geometry {
         this.radius = radius;
     }
 
-    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
+    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
 }
