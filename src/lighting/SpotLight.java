@@ -11,7 +11,7 @@ import primitives.Vector;
  */
 public class SpotLight extends PointLight {
     // Field represents the direction of the light
-    private Vector direction;
+    private final Vector direction;
 
     /**
      * Constructor

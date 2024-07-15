@@ -10,25 +10,18 @@ import java.util.Objects;
  * Interface for intersectable geometries
  */
 public abstract class Intersectable {
-    /**
-     * Finds all intersection points between the geometry and the given ray.
-     *
-     * @param ray The ray to check for intersections with.
-     * @return A list of intersection points, or an empty list if there are no intersections.
-     */
-    public List<GeoPoint> findGeoIntersections(Ray ray) {
-        return findGeoIntersectionsHelper(ray);
+
+
+    protected abstract List<GeoPoint>
+    findGeoIntersectionsHelper(Ray ray, double maxDistance);
+
+    public final List<GeoPoint> findGeoIntersections(Ray ray) {
+        return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
     }
 
-    /**
-     * A helper method for finding intersection points between the geometry and the given ray.
-     * This method is implemented by subclasses.
-     *
-     * @param ray The ray to check for intersections with.
-     * @return A list of intersection points, or an empty list if there are no intersections.
-     */
-
-    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
+    public final List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+        return findGeoIntersectionsHelper(ray, maxDistance);
+    }
 
     /**
      * Represents a geometric point with an associated geometry and position.

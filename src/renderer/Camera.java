@@ -141,7 +141,8 @@ public class Camera implements Cloneable {
         // Calculate the center point of the specified pixel
         Point pCenterPixel = CalculateCenterPointInPixel(nX, nY, j, i);
         // Construct a ray from the camera location to the center of the pixel
-        return new Ray(location, pCenterPixel.subtract(location));
+        Vector vIJ = pCenterPixel.subtract(location);
+        return new Ray(location, vIJ);
     }
     /**
      * Renders the image by casting rays through each pixel and writing the result to the image.

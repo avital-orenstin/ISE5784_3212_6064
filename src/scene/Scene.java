@@ -27,6 +27,23 @@ public class Scene {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+    public Color getBackground() {
+        return background;
+    }
+
+    public AmbientLight getAmbientLight() {
+        return ambientLight;
+    }
+    public Geometries getGeometries() {
+        return geometries;
+    }
+    public List<LightSource> getLights() {
+        return lights;
+    }
+
     /**
      * Sets the background color of the scene.
      *

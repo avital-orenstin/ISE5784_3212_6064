@@ -79,10 +79,21 @@ public class RayIntegrationTest {
                 .setVpSize(3, 3)
                 .setVpDistance(1)
                 .build();
-        Triangle triangle = new Triangle(new Point(0, 1, -2), new Point(1, -1, -2), new Point(-1, -1, -2));
-        assertEquals(1, sending_rays(camera, triangle, 3, 3), "There should be 1 cutoff point.");
-        triangle = new Triangle(new Point(0, 20, -2), new Point(1, -1, -2), new Point(-1, -1, -2));
-        assertEquals(2, sending_rays(camera, triangle, 3, 3), "There should be 2 cutoff points.");
+        Triangle triangle = new Triangle(
+                new Point(0, 1, -2),
+                new Point(1, -1, -2),
+                new Point(-1, -1, -2));
+        assertEquals(
+                1,
+                sending_rays(camera, triangle, 3, 3),
+                "There should be 1 cutoff point.");
+        triangle = new Triangle(
+                new Point(0, 20, -2),
+                new Point(1, -1, -2), new Point(-1, -1, -2));
+        assertEquals(
+                2,
+                sending_rays(camera, triangle, 3, 3),
+                "There should be 2 cutoff points.");
     }
 
     /**
@@ -97,26 +108,48 @@ public class RayIntegrationTest {
                 .setVpDistance(1)
                 .build();
         Sphere sphere = new Sphere(new Point(0, 0, -3), 1);
-        assertEquals(2, sending_rays(camera, sphere, 3, 3), "There should be 2 cutoff points.");
+        assertEquals(
+                2,
+                sending_rays(camera, sphere, 3, 3),
+                "There should be 2 cutoff points.");
         camera = Camera.getBuilder()
                 .setDirection(new Vector(0, 0, -1), new Vector(0, -1, 0))
                 .setLocation(new Point(0, 0, 0.5))
                 .setVpSize(3, 3)
                 .setVpDistance(1)
                 .build();
-        sphere = new Sphere(new Point(0, 0, -2.5), 2.5);
-        assertEquals(18, sending_rays(camera, sphere, 3, 3), "The test failed - there should be 18 cutoff points.");
-        sphere = new Sphere(new Point(0, 0, -2), 2);
-        assertEquals(10, sending_rays(camera, sphere, 3, 3), "The test failed - there should be 10 cutoff points.");
+        sphere = new Sphere(
+                new Point(0, 0, -2.5),
+                2.5);
+        assertEquals(
+                18,
+                sending_rays(camera, sphere, 3, 3),
+                "The test failed - there should be 18 cutoff points.");
+        sphere = new Sphere(
+                new Point(0, 0, -2), 2);
+        assertEquals(
+                10,
+                sending_rays(camera, sphere, 3, 3),
+                "The test failed - there should be 10 cutoff points.");
         camera = Camera.getBuilder()
                 .setDirection(new Vector(0, 0, -1), new Vector(0, -1, 0))
                 .setLocation(new Point(0, 0, 0))
                 .setVpSize(3, 3)
                 .setVpDistance(1)
                 .build();
-        sphere = new Sphere(new Point(0, 0, -2), 4);
-        assertEquals(9, sending_rays(camera, sphere, 3, 3), "The test failed - there should be 9 cutoff points.");
-        sphere = new Sphere(new Point(0, 0, 1), 0.5);
-        assertEquals(0, sending_rays(camera, sphere, 3, 3), "The test failed - there should be no cutoff points.");
+        sphere = new Sphere(
+                new Point(0, 0, -2),
+                4);
+        assertEquals(
+                9,
+                sending_rays(camera, sphere, 3, 3),
+                "The test failed - there should be 9 cutoff points.");
+        sphere = new Sphere(
+                new Point(0, 0, 1),
+                0.5);
+        assertEquals(
+                0,
+                sending_rays(camera, sphere, 3, 3),
+                "The test failed - there should be no cutoff points.");
     }
 }

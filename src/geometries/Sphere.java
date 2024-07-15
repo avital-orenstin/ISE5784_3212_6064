@@ -39,52 +39,51 @@ public class Sphere extends RadialGeometry {
         return n.normalize();
     }
 
+
     @Override
-    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        List<GeoPoint> intersections = null;
-
-        // if the ray starts at the center add epsilon
-        if (center.equals(ray.head)) {
-            intersections = List.of(new GeoPoint(this, ray.getPoint(radius)));
-            return intersections;
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+        Point p0 = ray.getHead();
+        Vector v = ray.getDirection();
+        Vector cTOs;
+        try {
+            //vector from camera to center of sphere
+            cTOs = center.subtract(p0);
+            //if p0 == _center it is illegal
+        } catch (IllegalArgumentException e) {
+            return List.of(new GeoPoint(this, (ray.getPoint(radius))));
         }
+        double tm = alignZero(v.dotProduct(cTOs));
+        double dSquared = (tm == 0) ? cTOs.lengthSquared() : cTOs.lengthSquared() - tm * tm;
+        double thSquared = alignZero(radius * radius - dSquared);
 
-        // Calculate the vector from the ray's starting point to the sphere's center
-        Vector u = center.subtract(ray.head);
+        if (thSquared <= 0) return null;
 
-        // Calculate the projection of u on the ray direction vector v
-        double tm = ray.direction.dotProduct(u);
+        double th = alignZero(Math.sqrt(thSquared));
+        if (th == 0) return null;
 
-        // Calculate d^2, the squared distance from the sphere's center to the ray
-        double d = alignZero(u.lengthSquared() - tm * tm);
-        d = alignZero(Math.sqrt(d));
+        double t1 = alignZero(tm - th);
+        double t2 = alignZero(tm + th);
+        Point P1 = ray.getPoint(t1);
+        Point P2 = ray.getPoint(t2);
 
-        // If d^2 is greater than the radius squared, there's no intersection
-        if (d >= radius) {
-            return null;
+        // ray constructed outside sphere
+        // two intersection points
+        if (t1 > 0 && t2 > 0) {
+
+            return List.of(new GeoPoint(this, P1), new GeoPoint(this, P2));
         }
-
-        // Calculate th the distance from the projection to the intersection points
-        double th = Math.sqrt((radius * radius) - (d * d));
-
-        // Calculate the distances to the intersection points
-        double t1 = tm + th;
-        double t2 = tm - th;
-
-        // Check for negative distances (no intersection behind the ray)
-        if (alignZero(t2) <= 0 && alignZero(t1) <= 0) {
-            return null;
+        // ray constructed inside sphere and intersect in back direction
+        if (t1 > 0 && alignZero(t1 - maxDistance) < 0) {
+            return List.of(new GeoPoint(this, P1));
         }
+        // ray constructed inside sphere and intersect in forward direction
+        if (t2 > 0 && alignZero(t2 - maxDistance) < 0) {
 
-        // If there's only one intersection point
-        if (alignZero(t2) <= 0) {
-            intersections = List.of(new GeoPoint(this, ray.getPoint(t1)));
-        } else {
-            intersections = List.of(new GeoPoint(this, ray.getPoint(t1)), new GeoPoint(this, ray.getPoint(t2)));
+            return List.of(new GeoPoint(this, P2));
         }
-
-        return intersections;
+        // no intersection points found - assurance return
+        // code should not be reaching this point
+        return null;
     }
-
 
 }
