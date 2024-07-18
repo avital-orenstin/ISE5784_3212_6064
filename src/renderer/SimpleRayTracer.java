@@ -65,6 +65,7 @@ public class SimpleRayTracer extends RayTracerBase {
         if (nv == 0) {
             return Color.BLACK;
         }
+
         int nShininess = intersection.geometry.getMaterial().getnShininess();
         Double3 kd = intersection.geometry.getMaterial().getkD();
         Double3 ks = intersection.geometry.getMaterial().getkS();
@@ -203,27 +204,6 @@ public class SimpleRayTracer extends RayTracerBase {
         } else {
             return ray.findClosestGeoPoint(intersections);
         }
-    }
-
-    /**
-     * Checks if a point is unshaded by finding any intersections between the point and the light source.
-     *
-     * @param gp    the GeoPoint representing the point to check.
-     * @param l     the direction from the point to the light source.
-     * @param n     the normal at the point.
-     * @param nl    the dot product between the normal vector and the direction vector from the point to the light source.
-     * @param light the light source.
-     * @return {@code true} if the point is unshaded, {@code false} otherwise.
-     */
-    private boolean unshaded(GeoPoint gp, Vector l, Vector n, double nl, LightSource light) {
-        Vector lightDirection = l.scale(-1);
-        Ray lightRay = new Ray(gp.point, lightDirection, n);
-        double maxDistance = light.getDistance(gp.point);
-        List<GeoPoint> intersections = scene.getGeometries().findGeoIntersections(lightRay, maxDistance);
-        if (intersections == null || intersections.isEmpty()) {
-            return false;
-        }
-        return true;
     }
 
     /**

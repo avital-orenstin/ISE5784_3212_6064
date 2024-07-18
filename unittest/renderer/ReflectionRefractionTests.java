@@ -361,109 +361,203 @@ public class ReflectionRefractionTests {
     }
 
     @Test
-    public void housePictureLeft() {
+    public void HouseWithoutImprovements() {
+        // Spotlight for the lamp
+        // Corrected spotlight for the lamp
+        scene.lights.add(
+                new SpotLight(
+                        new Color(255, 220, 180), // Warm light color
+                        new Point(5.2, 0, 170), // Position at the center of the lamp
+                        new Vector(-8, -6, 31) // Direction pointing towards the side of the house
+                ).setKc(1).setKl(0.0001).setKq(0.000005) // Adjusted attenuation
+        );
+
+// Additional spotlight for the roof
+        scene.lights.add(
+                new SpotLight(
+                        new Color(255, 220, 180), // Warm light color
+                        new Point(5.2, 0, 130), // Position at the center of the lamp
+                        new Vector(-4, -4, -5) // Adjusted direction to cover the roof
+                ).setKc(1).setKl(0.0001).setKq(0.000005) // Adjusted attenuation
+        );
+
         scene.geometries.add(
                 // Grass hill behind the house
-                new Sphere(new Point(0, -55, -258), 50)
+                new Sphere(
+                        new Point(0, -100, -50), 100)
                         .setEmission(new Color(34, 139, 34)) // Green grass
-                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100).setkT(0.0)),
+                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100)),
 
-                // Moon
-                new Sphere(new Point(-13, 14, -600), 3)
-                        .setEmission(new Color(255, 255, 204)) // Light yellow moon glow
-                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(300).setkT(0.0)),
-//front left
-                new Triangle(
-                        new Point(-4.25, 0, 0),    // Adjusted position to the right by 1 unit
-                        new Point(1.75, 0, 0),     // Adjusted position to the right by 1 unit
-                        new Point(-4.25, -8, 0)    // Adjusted position to the right by 1 unit
-                ).setEmission(new Color(160, 82, 45)) // Light brown color for front
-                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100).setkT(0.0)),
-//front right
-                new Triangle(
-                        new Point(1.75, 0, 0),     // Adjusted position to the right by 1 unit
-                        new Point(1.75, -8, 0),    // Adjusted position to the right by 1 unit
-                        new Point(-4.25, -8, 0)    // Adjusted position to the right by 1 unit
-                ).setEmission(new Color(160, 82, 45)) // Light brown color for front
-                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100).setkT(0.0)),
- //the problem that need to be fix
-                new Triangle(
-                        new Point(1.75, 0, 0),    // Reduced by 3 units to the right
-                        new Point(1.75, -8, 0),   // Adjusted height by reducing y-coordinate by 2 units
-                        new Point(3, -6, -9) // Reduced by 3 units to the right
-                ).setEmission(new Color(205, 133, 63)) // Lighter brown color for side
-                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100).setkT(0.0)),
-//the problem that need to be fix
-                new Triangle(
-                        new Point(3, 0, -7),    // Reduced by 3 units to the right
-                        new Point(1.75, -8, 0),   // Adjusted height by reducing y-coordinate by 2 units
-                        new Point(3, -6, -9) // Reduced by 3 units to the right
-                ).setEmission(new Color(205, 133, 63)) // Lighter brown color for side
-                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100).setkT(0.0)),
 
-// Right corner of the house (3D effect)
-                new Triangle(
-                        new Point(3, 0, -7),   // נקודת תחתונה קדמית שמאלית
-                        new Point(3, -6, -9),  // נקודת עליונה קדמית שמאלית
-                        new Point(1, 0, -9)    // נקודת תחתונה אחורית שמאלית
-                ).setEmission(new Color(205, 133, 63))
-                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100).setkT(0.0)),
-                new Triangle(
-                        new Point(-1, -6, 0),   // Adjusted height by reducing y-coordinate by 2 units
-                        new Point(3, 0, -4),    // Reduced by 3 units to the right
-                        new Point(3, -6, -4)    // Adjusted height by reducing y-coordinate by 2 units
-                ).setEmission(new Color(205, 133, 63)) // Lighter brown color for side
-                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100).setkT(0.0)),
+                // Moon with slight transparency
+                new Sphere(
+                        new Point(8.5, 9, -20), 2)
+                        .setEmission(new Color(255, 200, 80)) // Light yellow moon glow
+                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100).setkT(0.4)), // Added transparency
 
-//               //  Door (shifted 1 unit to the left)
-//                new Triangle(
-//                        new Point(-2, -8, 0), // Shifted 1 unit to the left
-//                        new Point(-4, -8, 0),
-//                        new Point(-4, -5, 0)
-//                ).setEmission(new Color(50, 25, 0)) // Dark brown color
-//                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100).setkT(0.0)),
-////door
-//                new Triangle(
-//                        new Point(-2, -8, 0), // Shifted 1 unit to the left
-//                        new Point(-2, -5, 0),
-//                        new Point(-4, -5, 0)
-//                ).setEmission(new Color(50, 25, 0)) // Dark brown color
-//                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100).setkT(0.0)),
 
-                // Roof (without shadow)
+                //building
+                new Triangle(
+                        new Point(-4.25, 0, 0),
+                        new Point(1.75, 0, 0),
+                        new Point(-4.25, -8, 0))
+                        .setEmission(new Color(160, 82, 45))  // Light brown color for front
+                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100)),
+
+                new Triangle(
+                        new Point(1.75, 0, 0),
+                        new Point(1.75, -8, 0),
+                        new Point(-4.25, -8, 0))
+                        .setEmission(new Color(160, 82, 45)) // Light brown color for front
+                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100)),
+
+
+                new Triangle(
+                        new Point(1.75, 0, 0),
+                        new Point(1.75, -8, 0),
+                        new Point(3, -6, -9))
+                        .setEmission(new Color(205, 133, 63)) // Lighter brown color for side
+                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100)),
+
+                new Triangle(
+                        new Point(3, 0, -7),
+                        new Point(1.75, -8, 0),
+                        new Point(3, -6, -9))
+                        .setEmission(new Color(205, 133, 63)) // Lighter brown color for side
+                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100)),
+
+                new Triangle(
+                        new Point(3, 0, -7),
+                        new Point(3, -6, -9),
+                        new Point(1, 0, -9))
+                        .setEmission(new Color(205, 133, 63))
+                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100)),
+
+                // Door
+                new Triangle(
+                        new Point(-0.2, -6.45, 200),
+                        new Point(-1.8, -6.45, 200),
+                        new Point(-1.8, -3.45, 200))
+                        .setEmission(new Color(50, 25, 0)) // Dark brown color
+                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100)),
+
+                new Triangle(
+                        new Point(-0.2, -6.45, 200),
+                        new Point(-0.2, -3.45, 200),
+                        new Point(-1.8, -3.45, 200))
+                        .setEmission(new Color(50, 25, 0)) // Dark brown color
+                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100)),
+
+
+                // Roof
                 new Triangle(
                         new Point(-5, -1, 5),
                         new Point(-4, 0, 2),
-                        new Point(-1, 4, 8)
-                ).setEmission(new Color(150, 0, 0)) // Adjust roof color
-                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100).setkT(0.0)),
+                        new Point(-1, 4, 8))
+                        .setEmission(new Color(150, 0, 0)) // Adjust roof color
+                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100)),
 
                 new Triangle(
                         new Point(2, -1, 5),
                         new Point(3, 0, 3),
-                        new Point(-1, 4, 8)
-                ).setEmission(new Color(150, 0, 0)) // Adjust roof color
-                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100).setkT(0.0)),
-//the rooft
+                        new Point(-1, 4, 8))
+                        .setEmission(new Color(150, 0, 0)) // Adjust roof color
+                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100)),
+
                 new Triangle(
                         new Point(-5, -1, 5),
                         new Point(2, -1, 5),
-                        new Point(-1, 4, 8)
-                ).setEmission(new Color(135, 0, 0)) // Adjust roof color
-                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100).setkT(0.0))
+                        new Point(-1, 4, 8))
+                        .setEmission(new Color(135, 0, 0)) // Adjust roof color
+                        .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100)),
+                //lamp
+
+                new Triangle(
+                        new Point(5.5, -5, 130),
+                        new Point(5,-5 , 130),
+                        new Point(5, 0, 130))
+                        .setEmission(new Color(51,34,18))
+                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)),
+
+                new Triangle(
+                        new Point(5, 0, 130),
+                        new Point(5.5, 0, 130),
+                        new Point(5.5, -5, 130))
+                        .setEmission(new Color(51, 34, 18)) // Wood color
+                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)),
+
+                new Sphere(
+                        new Point(5.2, 0, 130), 0.7)
+                        .setEmission(new Color(255, 170,50))
+                        .setMaterial(new Material().setKd(0.2).setKs(0.2).setShininess(60).setkT(0.7))
+
+
         );
+
+        int numStars = (int) (Math.random() * 70) + 80;
+
+        for (int i = 0; i < numStars; i++) {
+            // Generate random position within the upper part of the scene
+            double x = Math.random() * 180-60; // Adjusted range for a wider spread
+            double y = Math.random() * 7+10; // Adjusted range to spread across the upper half of the scene
+            double z = Math.random() * -20 - 50; // Varying depths within the scene
+
+            // Create a small white sphere for the star with random position
+            scene.geometries.add(
+                    new Sphere(new Point(x, y, z), 0.09) // Small white star
+                            .setEmission(new Color(255, 255, 255)) // White color
+                            .setMaterial(new Material().setKd(0.2).setKs(0.5).setShininess(50).setkT(0.8)) // Adjusted material properties
+            );
+
+            // Create a reflection sphere with kR to enable reflection
+            scene.geometries.add(
+                    new Sphere(new Point(x - 5, -y + 17, z), 0.09) // Small white star for reflection
+                            .setEmission(new Color(255, 255, 255)) // White color
+                            .setMaterial(new Material().setKd(0.2).setKs(0.5).setShininess(50).setkR(0.9)) // Adjusted material properties, set kR for reflection
+            );
+
+        }
+
 
         // Background color
         scene.setBackground(new Color(0, 0, 40)); // Dark blue background
 
-        // Lights (minimal moonlight)
-        scene.lights.add(new DirectionalLight(new Color(30, 30, 30), new Vector(-13, 14, -600))); // Dim moonlight direction
+// Point light to illuminate the moon
+        scene.lights.add(
+                new SpotLight(
+                        new Color(255, 255, 180), // Warm yellow light
+                        new Point(-9, 9, -50), // Positioned at the center of the moon
+                        new Vector(-5, -5, -50)));
+
+
+        // Point light to illuminate the moon
+        scene.lights.add(
+                new SpotLight(
+                        new Color(255, 255, 180), // Warm yellow light
+                        new Point(-9, 9, -50) ,// Positioned at the center of the moon
+                        new Vector(-5, -5, -50))
+        );
+
+        scene.lights.add(
+                new SpotLight(
+                        new Color(255, 200, 130), // Warm yellow light
+                        new Point(-1, -2.5, 130),new Vector(0, -1, 0)) // Position at the center of the first lamp sphere
+
+        );
+
+        scene.lights.add(
+                new SpotLight(
+                        new Color(255, 220, 180), // Warm light color
+                        new Point(-5.8, -2.5, 130), // Position at the center of the lamp
+                        new Vector(-1, -1, 0) // Direction pointing downwards
+                )
+        );
 
         // Camera setup
         cameraBuilder.setLocation(new Point(0, 0, 1000))
                 .setVpDistance(1000)
                 .setVpSize(25, 25)
-                .setImageWriter(new ImageWriter("DarkHouseSceneLeft", 800, 800))
+                .setImageWriter(new ImageWriter("HouseWithoutImprovements", 800, 800))
                 .build()
                 .renderImage()
                 .writeToImage();
