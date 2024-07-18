@@ -362,6 +362,7 @@ public class ReflectionRefractionTests {
 
     @Test
     public void HouseWithoutImprovements() {
+        //spot light for the shadow
         scene.lights.add(
                 new SpotLight(
                         new Color(255, 220, 170), // צבע אור חם
@@ -369,14 +370,6 @@ public class ReflectionRefractionTests {
                         new Vector(4, 4, -5)     // כיוון הנורה מצביע לצד הבית
                 ).setKc(1).setKl(0.0001).setKq(0.000005)
         );
-//// Additional spotlight for the roof
-//        scene.lights.add(
-//                new SpotLight(
-//                        new Color(255, 220, 180), // Warm light color
-//                        new Point(5.2, 0, 130), // Position at the center of the lamp
-//                        new Vector(-4, -4, -5) // Adjusted direction to cover the roof
-//                ).setKc(1).setKl(0.0001).setKq(0.000005) // Adjusted attenuation
-//        );
 
         scene.geometries.add(
                 new Sphere(
