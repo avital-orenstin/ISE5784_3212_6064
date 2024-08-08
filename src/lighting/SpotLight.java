@@ -1,9 +1,6 @@
 package lighting;
 
-import primitives.Color;
-import primitives.Point;
-import primitives.Util;
-import primitives.Vector;
+import primitives.*;
 
 /**
  * Class represents a light from a point with direction
@@ -17,11 +14,22 @@ public class SpotLight extends PointLight {
      * Constructor
      *
      * @param intensity parameter for field intensity in super
-     * @param position  parameter for field position in super
      * @param direction parameter for field direction
      */
-    public SpotLight(Color intensity, Point position, Vector direction) {
-        super(intensity, position);
+    public SpotLight(Color intensity, Vector direction) {
+        super(intensity, direction);
+        this.direction = direction.normalize();
+    }
+
+    /**
+     * SpotLight constructor
+     * @param Intensity
+     * @param position
+     * @param direction
+     */
+
+    public SpotLight(Color Intensity, Point position, Vector direction) {
+        super(Intensity, position);
         this.direction = direction.normalize();
     }
 

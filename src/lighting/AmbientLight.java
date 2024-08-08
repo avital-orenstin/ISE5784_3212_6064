@@ -3,7 +3,7 @@ package lighting;
 import primitives.Color;
 import primitives.Double3;
 /**
- * The `AmbientLight` class represents an ambient light source in 3D space.
+ * The AmbientLight class represents an ambient light source in 3D space.
  * Ambient light provides a uniform level of illumination to all parts of a scene, regardless of their orientation or position relative to other light sources.
  */
 public class AmbientLight extends Light {
@@ -27,4 +27,3 @@ public class AmbientLight extends Light {
     public static final AmbientLight NONE = new AmbientLight(Color.BLACK, new Double3(0.0));
 
 }
-

@@ -28,6 +28,11 @@ public class DirectionalLight extends Light implements LightSource{
     }
 
     @Override
+    public boolean isSoftShadow() {
+        return false;
+    }
+
+    @Override
     public Color getIntensity(Point p) {
         return super.getIntensity();
     }
@@ -40,5 +45,20 @@ public class DirectionalLight extends Light implements LightSource{
     @Override
     public double getDistance(Point point) {
         return Double.POSITIVE_INFINITY;
+    }
+
+    @Override
+    public Point getPosition() {
+        return null;
+    }
+
+    @Override
+    public double getWidth_light() {
+        return 0;
+    }
+
+    @Override
+    public double getHeight_light() {
+        return 0;
     }
 }
