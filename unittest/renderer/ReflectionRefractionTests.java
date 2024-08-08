@@ -601,9 +601,9 @@ public class ReflectionRefractionTests {
                         .setEmission(new Color(135, 0, 0)) // Adjust roof color
                         .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100))
         );
+//stars
 
-
-        int numStars = (int) (Math.random() * 70) + 80;
+        int numStars = (int) (Math.random() * 101) + 100;
 
         for (int i = 0; i < numStars; i++) {
             // Generate random position within the upper part of the scene
