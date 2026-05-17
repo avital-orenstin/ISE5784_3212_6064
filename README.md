@@ -111,12 +111,12 @@ ISE5784_3212_6064/
 | תבנית | היכן | מטרה |
 |--------|-------|--------|
 | **Builder** | `Camera.Builder` | בנייה גמישה ובטוחה של מצלמה עם הרבה פרמטרים אופציונליים |
-| **Composite** | `Geometries` | אוסף של גופים שכולם מממשים `Intersectable` — איגוד שקוף ללקוח |
-| **NVI** (Non-Virtual Interface) | `Intersectable.findGeoIntersections` קורא ל-`findGeoIntersectionsHelper` | מתודה ציבורית סופית שקוראת למתודה protected abstract |
+| **Composite** | `Geometries` |  אוסף של גופים שכולם מממשים `Intersectable` בלי קשר אם הגוף מורכב מכמה גופים |
+| **NVI** (Non-Virtual Interface) | `Intersectable.findGeoIntersections` קורא ל-`findGeoIntersectionsHelper` |DRY מתודה כללית שקוראת למתודה פרטית שהמימוש משתנה בין מחלקה למחלקה |
 | **Marker Interface** | `Cloneable` ב-`Camera` | סימון לתמיכה ב-`clone()` |
-| **PDS** (Plain Data Structure) | `Scene`, `Material`, `GeoPoint` | אובייקטי נתונים פסיביים, שדות ציבוריים |
-| **Iterator (foreach)** | מעבר על `Geometries` | שימוש בלולאת `for (... : ...)` במקום `Iterator` ידני |
-| **Wrapper** | `primitives.Color` עוטף את `java.awt.Color` | הסתרת מורכבות והוספת ערכי RGB בלתי-תחומים |
+| **PDS** (Plain Data Structure) | `Scene`, `Material`, `GeoPoint` | אוסף של נתונים-מחזיקה את התיאור בלי מתודות |
+| **Iterator (foreach)** | מעבר על `Geometries` | שימוש בלולאת `for (... : ...)` `Iterator` במקום ידני |
+| **Wrapper** | `primitives.Color` עוטף את `java.awt.Color` |מתאם בין המחלקה הקיימת למחלקה החדשה ומוסיף שכבה בינהם |
 
 ### עקרונות עיצוב (Design Principles)
 
