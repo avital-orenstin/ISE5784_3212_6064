@@ -177,10 +177,10 @@ Light (abstract — מחזיק intensity)
 |--------|--------|
 | `Camera` | המצלמה — **Builder Pattern**, מיישמת `Cloneable`, יורה קרניים דרך כל פיקסל |
 | `RayTracerBase` | מחלקת בסיס מופשטת למנועי מעקב קרניים |
-| `SimpleRayTracer` | המימוש המרכזי — מודל Phong + רקורסיה ל-`calcColor` להשתקפות/שבירה (עומק `MAX_CALC_COLOR_LEVEL = 10`, סף `MIN_CALC_COLOR_K = 0.001`) |
+| `SimpleRayTracer` | המוח שמחשב את הצבע בנקודה |
 | `ImageWriter` | כתיבת התמונה ל-PNG (סופק ע"י הקורס) |
 | `PixelManager` | ניהול תור הפיקסלים בעבודה מקבילית — **synchronized + volatile** (סופק ע"י הקורס) |
-| `paln_board` | "לוח דגימה" — מחלק פיקסל / מקור-אור לתת-דגימות עבור Anti-Aliasing ו-Soft Shadows |
+| `paln_board` | מחלק פיקסל לנקודות לפי השיטה שבוחרים |
 
 ### 🔹 `scene` — תיאור הסצנה
 `Scene` היא **PDS** המכילה: `name`, `background` (Color), `ambientLight`, `geometries`, `lights`.
