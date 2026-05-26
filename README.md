@@ -139,7 +139,7 @@ ISE5784_3212_6064/
 | `Point` | נקודה במרחב — בלתי-ניתנת לשינוי, פעולות `add`, `subtract`, `distance`, `distanceSquared` |
 | `Vector` | וקטור (יורש מ-`Point`) — `dotProduct`, `crossProduct`, `length`, `lengthSquared`, `normalize`, `scale` |
 | `Ray` | קרן — ראש (Point) + כיוון מנורמל (Vector) + `getPoint(t)` + `findClosestPoint` + `findClosestGeoPoint` |
-| `Color` | עטיפה ל-`java.awt.Color` המאפשרת ערכי RGB סופק על ידי הקורס בלתי-תחומים |
+| `Color` |סופק על ידי הקורס עטיפה ל-`java.awt.Color` המאפשרת ערכי RGB בלתי-תחומים |
 | `Material` | מאפייני חומר — `kD` (דיפיוזי), `kS` (ספקולרי), `kT` (שקיפות), `kR` (השתקפות), `nShininess` |
 
 ### 🔹 `geometries` — גופים גאומטריים
