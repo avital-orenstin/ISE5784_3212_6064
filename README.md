@@ -184,7 +184,9 @@ Light (abstract — מחזיק intensity)
 
 ### 🔹 `scene` — תיאור הסצנה
 `Scene` היא **PDS** המכילה: `name`, `background` (Color), `ambientLight`, `geometries`, `lights`.
-היא משתמשת ב-**setters משרשרים** בסגנון Builder (כל setter מחזיר `this`).
+                                                                                                   היא משתמשת ב-**setters משרשרים** בסגנון Builder (כל setter מחזיר `this`).
+
+
 
 ---
 
