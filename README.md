@@ -188,6 +188,8 @@ Light (abstract — מחזיק intensity)
 
 
 
+
+
 ---
 
 ## 🪜 שלבי הפרויקט
