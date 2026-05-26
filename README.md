@@ -191,7 +191,7 @@ Light (abstract — מחזיק intensity)
 `geometries`, `lights`.
 
 היא משתמשת ב־**setters** בסגנון Builder
-(כל setter מחזיר `this
+(כל setter מחזיר this)
 </div>
 
 
