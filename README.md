@@ -182,10 +182,17 @@ Light (abstract — מחזיק intensity)
 | `PixelManager` | ניהול תור הפיקסלים בעבודה מקבילית — **synchronized + volatile** (סופק ע"י הקורס) |
 | `paln_board` | מחלק פיקסל לנקודות לפי השיטה שבוחרים |
 
-### 🔹 `scene` — תיאור הסצנה
-`Scene` היא **PDS** המכילה: `name`, `background` (Color), `ambientLight`, `geometries`, `lights`.
-                                                                                                   היא משתמשת ב-**setters משרשרים** בסגנון Builder (כל setter מחזיר `this`).
+<div dir="rtl">
 
+### `scene` — תיאור הסצנה
+
+`Scene` היא **PDS** המכילה:
+`name`, `background` (`Color`), `ambientLight`,
+`geometries`, `lights`.
+
+היא משתמשת ב־**setters** בסגנון Builder
+(כל setter מחזיר `this
+</div>
 
 
 
