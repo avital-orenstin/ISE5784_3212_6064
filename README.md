@@ -20,10 +20,9 @@
 3. [מבנה הפרויקט](#-מבנה-הפרויקט)
 4. [ארכיטקטורה ועקרונות עיצוב](#-ארכיטקטורה-ועקרונות-עיצוב)
 5. [הספריות (Packages) שכתבנו](#-הספריות-packages-שכתבנו)
-6. [שלבי הפרויקט](#-שלבי-הפרויקט)
-7. [גלריית תמונות וקובץ פלט](#-גלריית-תמונות-וקובץ-פלט)
-8. [שיפורי איכות וביצועים — MP1 ו-MP2](#-שיפורי-איכות-וביצועים--mp1-ו-mp2)
-9. [כיצד מריצים את הפרויקט](#-כיצד-מריצים-את-הפרויקט)
+6. [גלריית תמונות](#-גלריית-תמונות)
+7. [שיפורי איכות וביצועים — MP1 ו-MP2](#-שיפורי-איכות-וביצועים--mp1-ו-mp2)
+8. [כיצד מריצים את הפרויקט](#-כיצד-מריצים-את-הפרויקט)
 
 ---
 
@@ -195,25 +194,6 @@ Light (abstract — מחזיק intensity)
 </div>
 
 ## גלריית תמונות
-
-### השלבים הבסיסיים
-
-#### צלליות (Shadow) — תרגיל 7 חלק 1
-תמונת בדיקה למימוש צללים — קרני צל מנקודת החיתוך אל מקור האור.
-
-<p align="center">
-  <img src="images/shadowSphere.png" alt="Shadow Sphere" width="380"/>
-  <img src="images/sShadow.png" alt="Scene Shadow" width="380"/>
-</p>
-
-#### השתקפות ושבירה (Reflection & Refraction) — תרגיל 7 חלק 2
-שני כדורים — אחד שקוף (`kT`) ואחד מבוסס שיקוף (`kR`), מדגימים את הרקורסיה ב-`calcColor`.
-
-<p align="center">
-  <img src="images/refractionTwoSpheres.png" alt="Refraction" width="320"/>
-  <img src="images/reflectionTwoSpheresMirrored.png" alt="Reflection Mirrored" width="320"/>
-  <img src="images/refractionShadow.png" alt="Refraction + Shadow" width="320"/>
-</p>
 
 ### שיפורים מתקדמים — MP1
 
