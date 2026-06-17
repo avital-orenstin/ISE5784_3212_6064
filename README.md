@@ -217,25 +217,16 @@ Light (abstract — מחזיק intensity)
 
 ### שיפורים מתקדמים — MP1
 
-#### Anti-Aliasing — דגימה רב-נקודתית בפיקסל
-דגימת 2×2 לעומת 9×9 — שיפור משמעותי בחדות הקצוות.
+#### Anti-Aliasing — Soft Shadows 
 
 <p align="center">
-  <img src="images/AntiAliasingTestImage2X2.png" alt="Anti-Aliasing 2x2" width="380"/>
-  <img src="images/AntiAliasingTestImage9X9.png" alt="Anti-Aliasing 9x9" width="380"/>
-</p>
-
-#### Soft Shadows — צללים רכים
-מקור האור הופך לאזור (Area Light), והקרניים נדגמות ממנו ברשת N×N.
-
-<p align="center">
-  <img src="images/SoftShadowsTestImage2X2.png" alt="Soft Shadows 2x2" width="380"/>
-  <img src="images/SoftShadowsTestImage9X9.png" alt="Soft Shadows 9x9" width="380"/>
+  <img src="images/HouseWithoutImprovements.png" width="380"/>
 </p>
 
 #### שילוב שני השיפורים יחד
+
 <p align="center">
-  <img src="images/AntiAliasing+SoftShadowsTestImage.png" alt="Anti-Aliasing + Soft Shadows" width="500"/>
+  <img src="images/HouseWithImprovements.pngg" alt="Anti-Aliasing + Soft Shadows" width="500"/>
 </p>
 
 ### MP2 — Adaptive Super-Sampling
