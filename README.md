@@ -206,7 +206,7 @@ Light (abstract — מחזיק intensity)
 #### שילוב שני השיפורים יחד
 
 <p align="center">
-  <img src="images/HouseWithImprovements.pngg" alt="Anti-Aliasing + Soft Shadows" width="500"/>
+  <img src="images/HouseWithImprovements.png" alt="Anti-Aliasing + Soft Shadows" width="500"/>
 </p>
 
 ### MP2 — Adaptive Super-Sampling
