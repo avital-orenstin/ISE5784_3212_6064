@@ -183,7 +183,7 @@ Light (abstract — מחזיק intensity)
 
 ### שיפורים מתקדמים — MP1
 
-#### Anti-Aliasing — Soft Shadows 
+#### Before Anti-Aliasing — Soft Shadows 
 
 <p align="center">
   <img src="images/HouseWithoutImprovements.png" width="500"/>
