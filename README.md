@@ -194,30 +194,7 @@ Light (abstract — מחזיק intensity)
 (כל setter מחזיר this)
 </div>
 
-
-
-
----
-
-## 🪜 שלבי הפרויקט
-
-הפרויקט נבנה **אינקרמנטלית** ב-7 תרגילים + 2 מיני-פרויקטים. בסיום כל שלב נדחף תג Git (PR01, PR02, ...).
-
-| שלב | יכולת | מחלקות / תבניות מרכזיות |
-|-----|---------|-------------------------|
-| **תרגיל 1** | פרימיטיבים וגופים גאומטריים בסיסיים | `Point`, `Vector`, `Ray`, `Util`, `Double3` + Geometry interface, Plane, Polygon, Sphere, Tube, Cylinder, Triangle. דגש על Immutability ו-Javadoc |
-| **תרגיל 2** | בדיקות יחידה אוטומטיות + מימוש `getNormal` | מעבר ל-**JUnit 5 (Jupiter)**, בדיקות לפי **EP + BVA**, מימוש מתמטי של נורמל לכל גוף |
-| **תרגיל 3** | חיתוכי קרן עם גופים | `findIntersections(Ray)` בכל גוף + **Composite Pattern**: `Geometries` + מתודה `Ray.getPoint(t)` + לולאות `foreach` |
-| **תרגיל 4** | חבילת מצלמה + יצירת קרניים | `Camera` עם **Builder Pattern** + **Marker Interface** (Cloneable) + `constructRay(nX, nY, j, i)` + בדיקות אינטגרציה (3×3 View Plane) |
-| **תרגיל 5** | צבע, ImageWriter, מנוע רינדור בסיסי | `Color`, `ImageWriter` (סופקו), `AmbientLight`, `Scene` (PDS), `RayTracerBase`, `SimpleRayTracer`, `Ray.findClosestPoint`, התמונה הראשונה |
-| **תרגיל 6** | מקורות אור + מודל Phong | מחלקה אבסטרקטית `Light` + ממשק `LightSource` + `DirectionalLight`, `PointLight`, `SpotLight` + `Material` + רפקטור ל-`GeoPoint` ו-`findGeoIntersections` (NVI) |
-| **תרגיל 7** | הצללה, שקיפות, השתקפות | `unshaded()` + רקורסיית `calcColor` עם `kT`/`kR` + `transparency()` להצללה חלקית + `findClosestIntersection` |
-| **MP1** | שיפור איכות התמונה | **Anti-Aliasing** (N×N קרניים בפיקסל) + **Soft Shadows** (אזור-אור עם דגימה) |
-| **MP2** | שיפור ביצועים | **Adaptive Super-Sampling** (חלוקה רקורסיבית של פיקסל) + **Multi-Threading** (חובה במ"פ 2) |
-
----
-
-## 🖼 גלריית תמונות וקובץ פלט
+## גלריית תמונות
 
 ### השלבים הבסיסיים
 
