@@ -200,7 +200,7 @@ Light (abstract — מחזיק intensity)
 #### Anti-Aliasing — Soft Shadows 
 
 <p align="center">
-  <img src="images/HouseWithoutImprovements.png" width="380"/>
+  <img src="images/HouseWithoutImprovements.png" width="500"/>
 </p>
 
 #### שילוב שני השיפורים יחד
