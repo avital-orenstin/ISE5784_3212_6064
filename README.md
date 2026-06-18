@@ -245,7 +245,9 @@ Camera camera = Camera.getBuilder()
 camera.renderImage();
 camera.writeToImage();
 ```
+תכתוב את זה כטקסט אחד בלי ירידת שורה
 
+setAntiAliasing הוא הדלת — בלעדיו שום שיפור איכות לא רץ. בלי שום הפעלה מקבלים קרן אחת לפיקסל (תמונה רגילה עם "מדרגות" בקצוות), עם setAntiAliasing(9,9) בלבד מקבלים 81 קרניים קבועות לכל פיקסל (איכות גבוהה אבל איטי), עם setAntiAliasing + setAdaptive(3) יחד ה-Adaptive מנצח ומשתמש ב-4 עד ~64 קרניים לפי המורכבות (איכות דומה, פי 5-10 מהיר), ועם רק setAdaptive(3) בלבד לא קורה כלום כי Adaptive נבדק רק בתוך ה-if של AA. הכלל: תמיד setAntiAliasing קודם, setAdaptive אחריו. 
 ---
 
 
