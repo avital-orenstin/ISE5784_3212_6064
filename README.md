@@ -181,25 +181,15 @@ Light (abstract — מחזיק intensity)
 
 ## גלריית תמונות
 
-### שיפורים מתקדמים — MP1
+### MP1
 
-#### Before Anti-Aliasing — Soft Shadows 
+#### Anti-Aliasing
+ מחליק את הקצוות המשוננים ("דמויי מדרגות") בתמונה — במקום לבדוק צבע אחד לכל פיקסל, בודקים כמה נקודות בתוכו ועושים ממוצע, וכך הקצוות נראים חלקים במקום מקופצים.
 
-<p align="center">
-  <img src="images/HouseWithoutImprovements.png" width="500"/>
-</p>
+#### Soft Shadows 
+הופך את הצללים מקווים חדים וחותכים לצללים מטושטשים בקצוות — בדיוק כמו צל אמיתי בעולם, שבו ככל שמתרחקים ממקור האור הצל נהיה רך יותר במקום שיהיה קו דרמטי בין אור לחושך.
 
-#### שילוב שני השיפורים יחד
-
-<p align="center">
-  <img src="images/HouseWithImprovements.png" alt="Anti-Aliasing + Soft Shadows" width="500"/>
-</p>
-
-### MP2 — Adaptive Super-Sampling
-
-דגימה אדפטיבית: במקום N² קרניים אחידות בכל פיקסל, מתחילים מ-4 פינות ורק אם הצבעים שונים — מחלקים רקורסיבית.
-
-
+### MP2 
 
 
 #### 3. Multi-Threading 
@@ -207,14 +197,25 @@ Light (abstract — מחזיק intensity)
 #### 4. Adaptive Super-Sampling 
 במקום לדגום N² קרניים בכל פיקסל באופן אחיד, האלגוריתם מתחיל מ-4 פינות הפיקסל,
 ורק אם הצבעים שונים — מחלק את הפיקסל רקורסיבית עד עומק `AdaptiveDepth`.
+#### Before the improvements
 
+
+<p align="center">
+  <img src="images/HouseWithoutImprovements.png" width="500"/>
+</p>
+
+#### Combining the improvements together
+
+<p align="center">
+  <img src="images/HouseWithImprovements.png" alt="Anti-Aliasing + Soft Shadows" width="500"/>
+</p>
 ---
 
-## 🚀 כיצד מריצים את הפרויקט
+## כיצד מריצים את הפרויקט
 
 ### דרישות מקדימות
 - **JDK 17** (או גרסה תואמת)
-- **IntelliJ IDEA** (מומלץ) — קובץ `.iml` והגדרות `.idea/` מצורפים
+- **IntelliJ IDEA** 
 - ספריות מתיקיית `lib/` מוגדרות כתלויות
 
 ### הרצת בדיקות
@@ -235,7 +236,7 @@ Camera camera = Camera.getBuilder()
         .setVpDistance(1000)
         .setImageWriter(new ImageWriter("MyScene", 800, 800))
         .setRayTracer(new SimpleRayTracer(scene)
-                .setNy_NX_of_light(9, 9))    // ← Soft Shadows 9×9
+        .setNy_NX_of_light(9, 9))    // ← Soft Shadows 9×9
         .setAntiAliasing(9, 9)               // ← Anti-Aliasing 9×9
         .setAdaptive(3)                      // ← Adaptive depth = 3
         .setNumThreads(4)                    // ← 4 תהליכונים
@@ -247,16 +248,8 @@ camera.writeToImage();
 
 ---
 
-## 📝 הערות סיום
 
-הפרויקט פותח לאורך סמסטר שלם ב-**שיטת Pair Programming** במסגרת **Extreme Programming (XP)**,
-עם דגש על **TDD** — בכל שלב נכתבו תחילה הבדיקות (לפי EP + BVA), ורק לאחר מכן המימוש.
-הקוד תועד בקפדנות בפורמט **Javadoc**, ולאורך הדרך בוצעו **Refactorings** רבים לשמירה על עקרונות
-DRY, KISS, YAGNI וחוק דמטר.
-
-כל קומיט סומן ב-Git ב-**תג מתאים** (`PR01`, `PR02`, ..., `PR07.1`) בסיום כל שלב.
-
-תודה לצוות הקורס על הליווי והאתגרים המעניינים לאורך הסמסטר. 💜
+תודה לצוות הקורס על הליווי והאתגרים המעניינים לאורך הסמסטר. 
 
 — **Isca Fitousi & Avital Orenstin**
 
