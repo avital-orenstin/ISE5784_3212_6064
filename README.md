@@ -199,55 +199,14 @@ Light (abstract — מחזיק intensity)
 
 דגימה אדפטיבית: במקום N² קרניים אחידות בכל פיקסל, מתחילים מ-4 פינות ורק אם הצבעים שונים — מחלקים רקורסיבית.
 
-<p align="center">
-  <img src="images/PR07Image.png" alt="Adaptive Sampling" width="500"/>
-</p>
 
-### 🏠 סצנת הבית — הפרויקט המסכם
 
-הסצנה המסכמת (נדרשת ע"י MP2: מודל תלת-ממד עם **עשרות גופים** ו-**5+ מקורות אור** מסוגים שונים)
-מציגה בית עם גג, חלונות, "כוכבים" משתקפים, ומקורות אור מרובים.
 
-#### גרסה ראשונית של הסצנה
-<p align="center">
-  <img src="images/HouseScene.png" alt="House Scene" width="500"/>
-</p>
-
-#### השוואה — לפני ואחרי השיפורים
-
-| לפני (ללא שיפורים) | אחרי (עם Anti-Aliasing + Soft Shadows + Adaptive + MT) |
-|:------------------:|:----------------------------------------------------:|
-| <img src="images/HouseWithoutImprovements.png" alt="House Without Improvements" width="380"/> | <img src="images/HouseWithImprovements.png" alt="House With Improvements" width="380"/> |
-
----
-
-## ⚙ שיפורי איכות וביצועים — MP1 ו-MP2
-
-### 🎨 MP1 — שיפורי איכות התמונה
-
-#### 1. Anti-Aliasing (החלקת קצוות)
-במקום קרן אחת בכל פיקסל, יורים **N×N קרניים** דרך תת-נקודות ברשת הפיקסל וממצעים את הצבעים.
-התוצאה: קצוות חלקים ללא "מדרגות".
-**המימוש:** `Camera.setAntiAliasing(x, y)` + `paln_board` (חלוקת הפיקסל לרשת).
-
-#### 2. Soft Shadows (צללים רכים)
-מקור אור נקודתי מורחב ל-**אזור-אור** (Area Light). במקום קרן צל אחת, נדגמות `Nx × Ny` קרניים מהנקודה אל אזור האור,
-ויחס המוצללים → רך.
-**המימוש:** `SimpleRayTracer.setNy_NX_of_light(ny, nx)`.
-
-### 🚀 MP2 — שיפורי ביצועים
-
-#### 3. Multi-Threading (ריבוי תהליכונים) — **חובה ב-MP2**
-כל תהליכון מושך פיקסל מתוך תור משותף (`PixelManager`) ומעבד אותו במקביל.
-**שיפור צפוי:** האצה של ~2.1-2.3 לעומת ריצה סדרתית.
-**המימוש:** `Camera.setNumThreads(n)` + `renderImage()` יוצרת `LinkedList<Thread>` ומשתמשת ב-`thread.start()` + `thread.join()`.
-**סנכרון:** ב-`PixelManager.nextPixel()` עם `synchronized(mutexNext)` + שדות `volatile`.
-
-#### 4. Adaptive Super-Sampling — השיפור המרכזי של MP2
+#### 3. Multi-Threading 
+כל תהליכון מושך פיקסל מתוך תור משותף ומעבד אותו במקביל.
+#### 4. Adaptive Super-Sampling 
 במקום לדגום N² קרניים בכל פיקסל באופן אחיד, האלגוריתם מתחיל מ-4 פינות הפיקסל,
 ורק אם הצבעים שונים — מחלק את הפיקסל רקורסיבית עד עומק `AdaptiveDepth`.
-**שיפור צפוי:** פי 5-10 (ללא MT) ופי 10-15 עם MT.
-**המימוש:** `Camera.setAdaptive(depth)` + לוגיקה רקורסיבית של חלוקה.
 
 ---
 
